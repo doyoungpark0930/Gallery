@@ -4,29 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/basic"
     tools:context=".LoginActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="137dp"
+        android:layout_marginBottom="350dp"
+        app:srcCompat="@drawable/project_gallery" />
 
     <TextView
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
         android:layout_marginStart="125dp"
+        android:layout_marginTop="400dp"
         android:layout_marginEnd="137dp"
         android:layout_marginBottom="265dp"
         android:text="한눈의 갤러리"
         android:textColor="@color/black"
-        android:textSize="30sp" />
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/getStarted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
         android:layout_marginStart="125dp"
+        android:layout_marginTop="450dp"
         android:layout_marginEnd="137dp"
-        android:layout_marginBottom="265dp"
+        android:layout_marginBottom="100dp"
         android:text="GET STARTED >" />
+
 
 </RelativeLayout>

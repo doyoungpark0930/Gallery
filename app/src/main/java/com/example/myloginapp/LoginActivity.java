@@ -2,6 +2,7 @@ package com.example.myloginapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -18,10 +19,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        TextView username =(TextView) findViewById(R.id.username);
-        TextView password =(TextView) findViewById(R.id.password);
+        TextView username = (TextView) findViewById(R.id.username);
+        TextView password = (TextView) findViewById(R.id.password);
 
         MaterialButton loginbtn = (MaterialButton) findViewById(R.id.loginbtn);
+        MaterialButton signupbtn = (MaterialButton) findViewById(R.id.signupbtn);
 
         //admin and admin
 
@@ -30,18 +32,28 @@ public class LoginActivity extends AppCompatActivity {
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin")){
+                if (username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
                     //로그인 성공시
-                    Toast.makeText(LoginActivity.this,"LOGIN SUCCESSFUL",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "LOGIN SUCCESSFUL", Toast.LENGTH_SHORT).show();
 
-                }else
+                } else
                     //로그인 실패시
-                    Toast.makeText(LoginActivity.this,"LOGIN FAILED !!!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "LOGIN FAILED !!!", Toast.LENGTH_SHORT).show();
             }
         });
 
+        signupbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToSignUpActivity();
+            }
+        });
 
     }
 
-
+    void navigateToSignUpActivity(){
+        finish();
+        Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+        startActivity(intent);
+    }
 }
