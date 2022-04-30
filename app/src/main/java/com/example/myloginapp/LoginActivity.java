@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
-                    //로그인 성공시
+                    //로그인 성공시(mysql에 있는 정보와 같다면 새로운 activity창으로 넘어가도록 설계)
                     Toast.makeText(LoginActivity.this, "LOGIN SUCCESSFUL", Toast.LENGTH_SHORT).show();
 
                 } else
