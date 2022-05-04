@@ -1,10 +1,7 @@
 package com.example.myloginapp;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,15 +10,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
-
-import org.w3c.dom.Text;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity"; //로그 찍기위한 TAG변수. 로그 안 찍어볼거면 무시해도
@@ -58,7 +46,6 @@ public class SignupActivity extends AppCompatActivity {
                         passwd = CheckPassword;
                         email = CheckEmail;
                         id = Id.getText().toString();
-
                         completeSignUp();
                     }
                 } else {
@@ -69,9 +56,8 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     void completeSignUp() {  //실행되면(OK버튼 누르면) 입력된 데이터들 mysql로 저장되도록 구현해야함.
-
         //mysql에 아이디 이메일 비밀번호를 차례로 저장한다. 그리고 다시 로그인창으로 가도록
-        DBLoader task = new DBLoader();
+        SignupLoader task = new SignupLoader();
         task.execute("http://" + IP_ADDRESS + "/signup.php", id, passwd, email);
         finish();   //스택에서 기존 페이지제거 즉, SignupActivity제거. 동기화 작업임.
         Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
@@ -80,82 +66,4 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
-    class DBLoader extends AsyncTask<String, Void, String> {
-        ProgressDialog progressDialog;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            progressDialog = ProgressDialog.show(SignupActivity.this,
-                    "Please Wait", null, true, true);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            progressDialog.dismiss();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            String id = (String) params[1];
-            String passwd = (String) params[2];
-            String email = (String) params[3];
-            String serverURL = (String) params[0];
-            String postParameters = "id=" + id + "&passwd=" + passwd + "&email=" + email;
-
-            try {
-
-                URL url = new URL(serverURL);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-
-
-                httpURLConnection.setReadTimeout(5000);
-                httpURLConnection.setConnectTimeout(5000);
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.connect();
-
-
-                OutputStream outputStream = httpURLConnection.getOutputStream();
-                outputStream.write(postParameters.getBytes("UTF-8"));
-                outputStream.flush();
-                outputStream.close();
-
-
-                int responseStatusCode = httpURLConnection.getResponseCode();
-
-                InputStream inputStream;
-                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
-                    inputStream = httpURLConnection.getInputStream();
-                } else {
-                    inputStream = httpURLConnection.getErrorStream();
-                }
-
-
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                StringBuilder sb = new StringBuilder();
-                String line = null;
-
-                while ((line = bufferedReader.readLine()) != null) {
-                    sb.append(line);
-                }
-
-
-                bufferedReader.close();
-
-
-                return sb.toString();
-
-
-            } catch (Exception e) {
-
-                return new String("Error: " + e.getMessage());
-            }
-        }
-
-    }
 }
