@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="홈"/>
+
+    <item
+        android:id="@+id/tab_map"
+        android:enabled="true"
+        android:icon="@drawable/ic_map"
+        android:title="탐색"/>
+
+    <item
+        android:id="@+id/tab_heart"
+        android:enabled="true"
+        android:icon="@drawable/ic_heart"
+        android:title="찜"/>
+
+    <item
+        android:id="@+id/tab_user"
+        android:enabled="true"
+        android:icon="@drawable/ic_user"
+        android:title="마이페이지"/>
+
+</menu>

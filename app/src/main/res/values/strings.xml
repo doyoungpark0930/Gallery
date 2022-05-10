@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MyLoginApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="user">마이페이지</string>
+    <string name="map">탐색페이지</string>
+    <string name="heart">찜페이지</string>
+    <string name="home">홈</string>
 </resources>
