@@ -1,14 +1,17 @@
-package com.example.myloginapp;
+package com.example.myloginapp.Home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
+import com.example.myloginapp.Heart.HeartFragment;
+import com.example.myloginapp.Map.MapFragment;
+import com.example.myloginapp.R;
+import com.example.myloginapp.Mypage.UserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
