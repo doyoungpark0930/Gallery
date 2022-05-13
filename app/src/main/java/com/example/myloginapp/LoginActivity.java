@@ -49,10 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         LoginLoader loginLoader = new LoginLoader();
         loginLoader.execute("http://" + IP_ADDRESS + "/select.php",id, passwd);
 
-        //admin and admin
 
-        //비밀번호와 아이디는 임의로 아이디: admin, 비밀번호 : admin으로 쳐야 로그인되게 하였다.
-        //여기서 수영님이 기존에 만들었던 로직으로 로그인 구현하면 될 듯
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,9 +64,16 @@ public class LoginActivity extends AppCompatActivity {
                             login=true;
                         }
                 }
+<<<<<<< HEAD
                 if(login) {
                     forgat.setText(CurUser.getUserNum() + " " + CurUser.getId() + " " + CurUser.getEmail() + " ");
                 }else{
+=======
+                if(login) { //로그인이 된다면 실행됨
+                    forgat.setText(CurUser.getUserNum() + " " + CurUser.getId() + " " + CurUser.getEmail() + " ");
+                    navigateToSearchingGallery();
+                }else{  //로그인이 실패됐다면
+>>>>>>> 00efdbe0edaa61f866fd93f8313e6566ee8af860
                     Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show(); //로그인화면으로 왔을시 거기서 ID생성 토스트메시지 띄워줌
                 }
             }
@@ -85,6 +89,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    void navigateToSearchingGallery()
+    {
+        finish();
+        Intent intent = new Intent(LoginActivity.this, SearchingGallery.class);
+        startActivity(intent);
+    }
     void navigateToSignUpActivity(){
         finish();
         Intent intent = new Intent(LoginActivity.this, SignupActivity.class);

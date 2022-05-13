@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:background="@color/basic">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="35dp"
+            android:textSize="20dp"
+            android:text="전국 전시회 찾기"
+            android:textColor="@color/strong"/>
+
+    </LinearLayout>
+
+    <SearchView
+        android:id="@+id/search"
+        app:queryHint="search"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="30dp"
+        android:layout_width="325dp"
+        android:background="#EEEEEE"
+        android:layout_height="wrap_content"/>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:divider="#ffffff"
+        android:dividerHeight="40dp"></ListView>
+
+</LinearLayout>

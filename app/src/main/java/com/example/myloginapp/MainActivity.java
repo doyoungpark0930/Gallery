@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.myloginapp.Home.HomeActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     void navigateToLoginActivity(){ //LoginActivity로 가는 함수
         finish();
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
         startActivity(intent);
     }
 }

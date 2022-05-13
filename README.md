@@ -1,11 +1,16 @@
-### 오픈전문프로젝트 GALLERY
+영어만가능. 대문자 넣지마세요. 검색기능 안됨.영어만가능.
 
 
-저번 프젝 url : https://github.com/2021-OS-Dev-Project/Gallery 참고
+SearchingGallery.java에서 쓰이는 파일들
+	row_items.xml		//list뷰에서 각 리스트에 사용될 행파일
+	searching_gallery.xml	//검색view와 list뷰를 갖고있음
+	GalleryInfro.java	//갤러리정보를 담고있음
 
-전체 소스코드 다운받아서 
-C:\Users\user\AndroidStudioProjects에서 아무 폴더에 넣고 안드로이드 스튜디오에서 실행시키면 알아서 에디터 설정돼요.
-
-
+SearchingGallery.java에서
+27~29번째줄
+ int images[] = {R.drawable.project_gallery,R.drawable.project_gallery,R.drawable.project_gallery,R.drawable.project_gallery,R.drawable.project_gallery};     //이미지 가져와서 동적으로 넣어줘야함
+    String names[]={"apple","banana","kiwi","watermelon","orange"};      //여기나중에 동적으로 끌어서 넣어줘야함  ,일단 소문자만 넣어야함
+    String desc[]={"This is  apple","This is Banana","This is Kiwi","This is Watermelon","This is orange"};  //여기도 동적으로 넣어줘야함
+이부분 서버에서 데이터 끌어올때 image,name,desc(description)순서대로 잘 넣기. 순서대로 들어가서 화면에 표시됨.
 
 
