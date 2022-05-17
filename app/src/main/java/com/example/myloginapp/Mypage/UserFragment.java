@@ -1,5 +1,7 @@
 package com.example.myloginapp.Mypage;
 
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import com.example.myloginapp.*;
 import androidx.fragment.app.Fragment;
@@ -11,8 +13,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.myloginapp.HelperClasses.Adapter.ExhibitionViewAdapter;
+import com.example.myloginapp.HelperClasses.Adapter.ReviewAdapter;
 import com.example.myloginapp.HelperClasses.FeaturedHelperClass;
 import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
@@ -31,8 +36,17 @@ public class UserFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private TextView textView1;
+    private TextView textView2;
+    private ImageView imageView;
+
     private RecyclerView featuredRecycler;
+    private RecyclerView featuredRecycler2;
+
     private ExhibitionViewAdapter adapter;
+
+    private ReviewAdapter adapter2;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -73,12 +87,29 @@ public class UserFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_user, container, false);
 
+        imageView =  (ImageView) rootView.findViewById(R.id.profile_image);
+        textView1 = (TextView) rootView.findViewById(R.id.profile_id);
+        textView2 = (TextView) rootView.findViewById(R.id.profile_message);
+
         featuredRecycler = (RecyclerView) rootView.findViewById(R.id.featured_recycler);
+        featuredRecycler2 = (RecyclerView) rootView.findViewById(R.id.featured_recycler2);
 
         featuredRecycler.setHasFixedSize(true);
+        featuredRecycler2.setHasFixedSize(true);
+
         adapter = new ExhibitionViewAdapter();
+        adapter2 = new ReviewAdapter();
+
         featuredRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, true));
         featuredRecycler.setAdapter(adapter);
+
+        featuredRecycler2.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, true));
+        featuredRecycler2.setAdapter(adapter2);
+
+
+        imageView.setImageResource(R.drawable.profile);
+        textView1.setText("test id");
+        textView2.setText("test message");
 
         Log.e("Frag", "마이페이지 recycler");
         return rootView;

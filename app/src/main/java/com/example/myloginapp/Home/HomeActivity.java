@@ -22,6 +22,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
     final String TAG = this.getClass().getSimpleName();
+    // 로그인 화면으로 넘어가고 싶다면, false
     boolean isLogged = true;
 
     LinearLayout home_ly;
@@ -38,7 +39,6 @@ public class HomeActivity extends AppCompatActivity {
         init();
         SettingListener();
 
-        bottomNavigationView.setSelectedItemId(R.id.home);
     }
 
     private void init(){
