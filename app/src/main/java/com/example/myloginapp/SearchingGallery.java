@@ -25,11 +25,10 @@ public class SearchingGallery extends AppCompatActivity {
     SearchView searchView;
     ListView listView;
 
-    int images[] = {R.drawable.project_gallery,R.drawable.project_gallery,R.drawable.project_gallery,R.drawable.project_gallery,R.drawable.project_gallery};     //이미지 가져와서 동적으로 넣어줘야함
-    String names[]={"apple","banana","kiwi","watermelon","orange"};      //여기나중에 동적으로 끌어서 넣어줘야함  ,일단 소문자만 넣어야함
-    String desc[]={"This is  apple","This is Banana","This is Kiwi","This is Watermelon","This is orange"};  //여기도 동적으로 넣어줘야함
-
-    List<GalleryInfo> listItems = new ArrayList<>();
+//    int images[] = {R.drawable.project_gallery,R.drawable.project_gallery,R.drawable.project_gallery,R.drawable.project_gallery,R.drawable.project_gallery};     //이미지 가져와서 동적으로 넣어줘야함
+//    String names[]={"apple","banana","kiwi","watermelon","orange"};      //여기나중에 동적으로 끌어서 넣어줘야함  ,일단 소문자만 넣어야함
+//    String desc[]={"This is  apple","This is Banana","This is Kiwi","This is Watermelon","This is orange"};  //여기도 동적으로 넣어줘야함
+//    List<GalleryInfo> listItems = new ArrayList<>();
 
     CustomAdapter customAdapter;
 
@@ -102,9 +101,9 @@ public class SearchingGallery extends AppCompatActivity {
             TextView itemName= view.findViewById(R.id.itemName);
             TextView itemDesc = view.findViewById(R.id.itemDesc);
 
-            //imageView.setImageResource(itemsModelListFiltered.get(position).getImage());
+            imageView.setImageBitmap(itemsModelListFiltered.get(position).getImage());
             itemName.setText(itemsModelListFiltered.get(position).getName());
-            itemDesc.setText(itemsModelListFiltered.get(position).getDesc());
+            itemDesc.setText(itemsModelListFiltered.get(position).PrintArt());
 
             return view;
         }

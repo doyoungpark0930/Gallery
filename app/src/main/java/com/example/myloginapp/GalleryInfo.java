@@ -28,8 +28,8 @@ public class GalleryInfo {
     public GalleryInfo(int ArtNum,String ArtName,String StartPeriod,String EndPeriod,String Price,int SRC,String image,String explanation){
         this.ArtNum=ArtNum;
         this.name=ArtName;
-        this.StartPeriod=StartPeriod;
-        this.EndPeriod=EndPeriod;
+        this.StartPeriod=StartPeriod.replace(".","-");
+        this.EndPeriod=EndPeriod.replace(".","-");
         this.Price=Price;
         image=image.replace("\\","");
         this.url=image;
@@ -39,7 +39,7 @@ public class GalleryInfo {
     }
     StringBuilder PrintArt() {
         StringBuilder msg=new StringBuilder();
-        msg.append("기간 : "+getStartPeriod()+" ~ "+getEndPeriod()+"\n가격 : "+getPrice()+"\n\n설명 : "+getDesc());;
+        msg.append("시작 날짜 : "+getStartPeriod()+"\n종료 날짜 : "+getEndPeriod()+"\n가격 : "+getPrice()+"\n");
         return msg;
     }
     int getArtNum() {

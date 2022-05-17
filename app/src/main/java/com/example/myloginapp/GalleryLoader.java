@@ -31,7 +31,7 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
             showResult();
             ImageLoader image =new ImageLoader();
             image.execute();
-            //Collections.sort(Object.art, new ArtComparator());
+            Collections.sort(Object.art, new ArtComparator());
         }
     }
     @Override
@@ -101,7 +101,7 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
                 String no = item.getString("no");
                 String name = item.getString("name");
                 String urlStr=item.getString("url");
-                String StartPeriod = item.getString("StartPeriod");
+                String StartPeriod = item.getString("StartPeriod").replace(" ","");
                 String EndPeriod = item.getString("EndPeriod");
                 String Price = item.getString("Price");
                 String Explanation = item.getString("Explanation");
@@ -118,9 +118,11 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
     class ArtComparator implements Comparator<GalleryInfo> {
         @Override
         public int compare(GalleryInfo o1, GalleryInfo o2) {
-            String[] str1 = o1.getStartPeriod().split(".");
-            String[] str2 = o2.getStartPeriod().split(".");
+            String[] str1 = o1.getStartPeriod().split("-");
+            String[] str2 = o2.getStartPeriod().split("-");
 
+            if(str1.length<2||str2.length<2)
+                return -1;
             if (Integer.parseInt(str1[0]) == Integer.parseInt(str2[0])) {
                 if (Integer.parseInt(str1[1]) == Integer.parseInt(str2[1])) {
                     return Integer.parseInt(str1[2]) - Integer.parseInt(str2[2]);
@@ -148,12 +150,3 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
         }
     }
 }
-
-/*try {
-                    URL url = new URL(urlStr);
-                    Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    Object.art.add(new GalleryInfo(Integer.parseInt(no), name, StartPeriod, EndPeriod, Price, R.drawable.test, bitmap, Explanation));
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-                수정*/

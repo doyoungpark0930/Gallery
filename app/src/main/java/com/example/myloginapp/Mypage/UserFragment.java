@@ -3,7 +3,7 @@ package com.example.myloginapp.Mypage;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
-import com.example.myloginapp.*;
+
 import androidx.fragment.app.Fragment;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,12 +17,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.myloginapp.HelperClasses.Adapter.ExhibitionViewAdapter;
+<<<<<<< Updated upstream
 import com.example.myloginapp.HelperClasses.Adapter.ReviewAdapter;
 import com.example.myloginapp.HelperClasses.FeaturedHelperClass;
 import com.example.myloginapp.Object;
+=======
+>>>>>>> Stashed changes
 import com.example.myloginapp.R;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.

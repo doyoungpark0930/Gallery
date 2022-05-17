@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     public static String IP_ADDRESS = "113.198.138.221"; //현재 나의 ip번호 -> 서버로 변경할 예정임.
     TextView forgat;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,25 +56,29 @@ public class LoginActivity extends AppCompatActivity {
                 id=username.getText().toString();
                 passwd=password.getText().toString();
 
-                boolean login=false;
+                boolean is_checking=false;
+                boolean is_valid=false;
                 for(UserInfo user : Object.userlist){
                     if(user.getId().equals(id))
                         if(user.getPasswd().equals(passwd)) {
                             Object.user = user;
-                            login=true;
+                            is_checking=true;
+                            is_valid=true;
                         }
+                    else
+                        is_valid=false;
                 }
 
-                if(login) { //로그인이 된다면 실행됨
-                    forgat.setText(Object.user.getUserNum() + " " + Object.user.getId() + " " + Object.user.getEmail() + " ");
+                if(is_checking&&is_valid) { //로그인이 된다면 실행됨
+                    forgat.setText("환영합니다 "+Object.user.getId()+"고객님!");
                     navigateToSearchingGallery();
-                }else{  //로그인이 실패됐다면
-
-                    Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show(); //로그인화면으로 왔을시 거기서 ID생성 토스트메시지 띄워줌
+                }else if(!is_checking){  //로그인이 실패됐다면
+                    Toast.makeText(getApplicationContext(), "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show(); //로그인화면으로 왔을시 거기서 ID생성 토스트메시지 띄워줌
+                }else if(!is_valid){
+                    Toast.makeText(getApplicationContext(), "없는 ID 입니다.", Toast.LENGTH_SHORT).show(); //로그인화면으로 왔을시 거기서 ID생성 토스트메시지 띄워줌
                 }
             }
         });
-
 
         signupbtn.setOnClickListener(new View.OnClickListener() {
             @Override
