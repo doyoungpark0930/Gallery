@@ -1,14 +1,20 @@
 package com.example.myloginapp.Home;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.myloginapp.Heart.HeartFragment;
+import com.example.myloginapp.LoginActivity;
+import com.example.myloginapp.MainActivity;
 import com.example.myloginapp.Map.MapFragment;
 import com.example.myloginapp.R;
 import com.example.myloginapp.Mypage.UserFragment;
@@ -16,12 +22,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
     final String TAG = this.getClass().getSimpleName();
+    boolean isLogged = true;
 
     LinearLayout home_ly;
     BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
@@ -45,6 +53,8 @@ public class HomeActivity extends AppCompatActivity {
     class TabSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            AlertDialog.Builder myAlertBuilder = new AlertDialog.Builder(HomeActivity.this);
+
             switch (menuItem.getItemId()) {
                 case R.id.tab_home: {
                     getSupportFragmentManager().beginTransaction()
@@ -65,9 +75,30 @@ public class HomeActivity extends AppCompatActivity {
                     return true;
                 }
                 case R.id.tab_user: {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.home_ly, new UserFragment())
-                            .commit();
+                    if(isLogged){
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.home_ly, new UserFragment())
+                                .commit();
+                    }else{
+                        myAlertBuilder.setTitle("로그인이 필요한 기능입니다.");
+                        myAlertBuilder.setMessage("로그인을 해주세요.");
+                        myAlertBuilder.setPositiveButton("Ok",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+
+                        myAlertBuilder.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+
+                        myAlertBuilder.show();
+                    }
                     return true;
                 }
             }
