@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class LoginLoader extends AsyncTask<String, Void, String> {
     String mJsonString;
-    public static ArrayList<UserInfo> users;
 
     @Override
     protected void onPreExecute() {
@@ -35,7 +34,6 @@ public class LoginLoader extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        LoginLoader.users=new ArrayList<UserInfo>();
 
         String id = (String) params[1];
         String passwd = (String) params[2];
@@ -107,8 +105,7 @@ public class LoginLoader extends AsyncTask<String, Void, String> {
                 String passwd = item.getString("passwd");
                 String email = item.getString("email");
 
-                UserInfo user = new UserInfo(Integer.parseInt(no), id, passwd, email);
-                LoginLoader.users.add(user);
+                Object.userlist.add(new UserInfo(Integer.parseInt(no), id, passwd, email));
             }
 
         } catch (JSONException e) {

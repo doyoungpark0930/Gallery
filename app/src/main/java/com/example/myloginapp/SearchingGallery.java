@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -39,14 +40,14 @@ public class SearchingGallery extends AppCompatActivity {
 
         searchView=findViewById(R.id.search);
         listView=findViewById(R.id.listView);
-
+/*
         for(int i=0;i<names.length;i++){
             GalleryInfo itemsModel = new GalleryInfo(names[i],desc[i],images[i]);
 
             listItems.add(itemsModel);
-        }
+        } */
 
-        customAdapter = new CustomAdapter(listItems,this);
+        customAdapter = new CustomAdapter(Object.art,this);
 
         listView.setAdapter(customAdapter);
 
@@ -64,9 +65,6 @@ public class SearchingGallery extends AppCompatActivity {
             }
         });
     }
-
-
-
 
 
     public class CustomAdapter extends BaseAdapter implements Filterable {
@@ -104,7 +102,7 @@ public class SearchingGallery extends AppCompatActivity {
             TextView itemName= view.findViewById(R.id.itemName);
             TextView itemDesc = view.findViewById(R.id.itemDesc);
 
-            imageView.setImageResource(itemsModelListFiltered.get(position).getImage());
+            //imageView.setImageResource(itemsModelListFiltered.get(position).getImage());
             itemName.setText(itemsModelListFiltered.get(position).getName());
             itemDesc.setText(itemsModelListFiltered.get(position).getDesc());
 

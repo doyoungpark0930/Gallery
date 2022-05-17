@@ -1,7 +1,7 @@
 package com.example.myloginapp.Mypage;
 
 import android.os.Bundle;
-
+import com.example.myloginapp.*;
 import androidx.fragment.app.Fragment;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.myloginapp.HelperClasses.Adapter.ExhibitionViewAdapter;
 import com.example.myloginapp.HelperClasses.FeaturedHelperClass;
+import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
 
 import java.util.ArrayList;
@@ -32,8 +33,6 @@ public class UserFragment extends Fragment {
 
     private RecyclerView featuredRecycler;
     private ExhibitionViewAdapter adapter;
-    private ArrayList<FeaturedHelperClass> list = new ArrayList<>();
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -76,10 +75,9 @@ public class UserFragment extends Fragment {
 
         featuredRecycler = (RecyclerView) rootView.findViewById(R.id.featured_recycler);
 
-        list = FeaturedHelperClass.createContactsList(5);
         featuredRecycler.setHasFixedSize(true);
-        adapter = new ExhibitionViewAdapter(getActivity(), list);
-        featuredRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        adapter = new ExhibitionViewAdapter();
+        featuredRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, true));
         featuredRecycler.setAdapter(adapter);
 
         Log.e("Frag", "마이페이지 recycler");

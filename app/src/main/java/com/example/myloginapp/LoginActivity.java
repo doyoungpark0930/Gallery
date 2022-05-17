@@ -34,7 +34,6 @@ public class LoginActivity extends AppCompatActivity {
     static String passwd;
     public static String IP_ADDRESS = "113.198.138.221"; //현재 나의 ip번호 -> 서버로 변경할 예정임.
     TextView forgat;
-    public UserInfo CurUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,23 +56,19 @@ public class LoginActivity extends AppCompatActivity {
                 passwd=password.getText().toString();
 
                 boolean login=false;
-                for(UserInfo user : LoginLoader.users){
+                for(UserInfo user : Object.userlist){
                     if(user.getId().equals(id))
                         if(user.getPasswd().equals(passwd)) {
-                            CurUser = user;
+                            Object.user = user;
                             login=true;
                         }
                 }
-<<<<<<< HEAD
-                if(login) {
-                    forgat.setText(CurUser.getUserNum() + " " + CurUser.getId() + " " + CurUser.getEmail() + " ");
-                }else{
-=======
+
                 if(login) { //로그인이 된다면 실행됨
-                    forgat.setText(CurUser.getUserNum() + " " + CurUser.getId() + " " + CurUser.getEmail() + " ");
+                    forgat.setText(Object.user.getUserNum() + " " + Object.user.getId() + " " + Object.user.getEmail() + " ");
                     navigateToSearchingGallery();
                 }else{  //로그인이 실패됐다면
->>>>>>> 00efdbe0edaa61f866fd93f8313e6566ee8af860
+
                     Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show(); //로그인화면으로 왔을시 거기서 ID생성 토스트메시지 띄워줌
                 }
             }

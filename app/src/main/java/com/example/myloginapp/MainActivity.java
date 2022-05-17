@@ -3,11 +3,18 @@ package com.example.myloginapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.myloginapp.Home.HomeActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +22,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        // 임시로 정렬을 확인하기 위해 사용함
+        // 이미지 로더 부분
+        GalleryLoader Loader = new GalleryLoader();
+        Loader.execute("http://"+LoginActivity.IP_ADDRESS+"/ArtSelect.php", "");
         Button getStarted =(Button) findViewById(R.id.getStarted);
 
         getStarted.setOnClickListener(new View.OnClickListener() {
@@ -36,4 +46,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
         startActivity(intent);
     }
+
 }

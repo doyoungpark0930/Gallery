@@ -10,17 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myloginapp.GalleryInfo;
 import com.example.myloginapp.HelperClasses.FeaturedHelperClass;
 import com.example.myloginapp.R;
-
+import com.example.myloginapp.Object;
 import java.util.ArrayList;
 
 public class ExhibitionViewAdapter extends RecyclerView.Adapter<ExhibitionViewAdapter.Holder>{
-    private ArrayList<FeaturedHelperClass> featuredLocations;
-
-    public ExhibitionViewAdapter(FragmentActivity activity, ArrayList<FeaturedHelperClass> featuredLocations) {
-        this.featuredLocations = featuredLocations;
-    }
 
     @NonNull
     @Override
@@ -31,20 +27,22 @@ public class ExhibitionViewAdapter extends RecyclerView.Adapter<ExhibitionViewAd
 
         return featuredViewHolder;
     }
-
+/**/
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        FeaturedHelperClass featuredHelperClass = featuredLocations.get(position);
 
-        holder.image.setImageResource(featuredHelperClass.getImage());
-        holder.title.setText(featuredHelperClass.getTitle());
-        holder.desc.setText(featuredHelperClass.getDescription());
+        /*이부분 수정해야함. 왜냐하면, 구독한 내용으로 변경해야하기 때문, 또한 반복문을 이용할시 하나의
+        * 내용물만 반복하게 됨으로, 반복문을 밖에서 다른곳에서 선언해야할듯,,, 일단 수요일날 희진이랑
+        * 상의 예정.*/
+        holder.image.setImageBitmap(Object.art.get(2).getImage());
+        holder.title.setText(Object.art.get(2).getName());
+        holder.desc.setText(Object.art.get(2).getDesc());
 
     }
 
     @Override
     public int getItemCount() {
-        return featuredLocations.size();
+        return Object.art.size();
     }
 
     // ViewHolder는 하나의 View를 보존하는 역할을 한다

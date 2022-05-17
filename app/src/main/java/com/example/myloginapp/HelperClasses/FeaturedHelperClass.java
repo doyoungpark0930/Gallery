@@ -1,6 +1,7 @@
 package com.example.myloginapp.HelperClasses;
 
 import com.example.myloginapp.R;
+import com.example.myloginapp.Object;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ public class FeaturedHelperClass {
     public static ArrayList<FeaturedHelperClass> createContactsList(int numContacts){
         ArrayList<FeaturedHelperClass> contacts = new ArrayList<FeaturedHelperClass>();
         for(int i = 1; i <= numContacts; i++){
-            contacts.add(new FeaturedHelperClass(R.drawable.test, "test", "내용"));
+            //contacts.add(new FeaturedHelperClass(R.drawable.test, Object.art.getName(), "내용"));
         }
 
         return contacts;
