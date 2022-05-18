@@ -1,14 +1,6 @@
 package com.example.myloginapp.Mypage;
 
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.myloginapp.HelperClasses.Adapter.ExhibitionViewAdapter;
-<<<<<<< Updated upstream
 import com.example.myloginapp.HelperClasses.Adapter.ReviewAdapter;
-import com.example.myloginapp.HelperClasses.FeaturedHelperClass;
-import com.example.myloginapp.Object;
-=======
->>>>>>> Stashed changes
 import com.example.myloginapp.R;
 
 /**

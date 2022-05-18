@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("한눈의 갤러리");
         setContentView(R.layout.activity_main);
         // 임시로 정렬을 확인하기 위해 사용함
         // 이미지 로더 부분
