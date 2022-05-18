@@ -43,6 +43,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private void init(){
         home_ly = findViewById(R.id.home_ly);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.home_ly, new HomeFragment())
+                .commit();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
     }
 

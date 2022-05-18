@@ -30,9 +30,10 @@ public class ExhibitionViewAdapter extends RecyclerView.Adapter<ExhibitionViewAd
         /*이부분 수정해야함. 왜냐하면, 구독한 내용으로 변경해야하기 때문, 또한 반복문을 이용할시 하나의
         * 내용물만 반복하게 됨으로, 반복문을 밖에서 다른곳에서 선언해야할듯,,, 일단 수요일날 희진이랑
         * 상의 예정.*/
-        holder.image.setImageBitmap(Object.art.get(2).getImage());
-        holder.title.setText(Object.art.get(2).getName());
-        holder.desc.setText(Object.art.get(2).getDesc());
+
+        holder.image.setImageBitmap(Object.art.get(position).getImage());
+        holder.title.setText(Object.art.get(position).getName());
+        holder.desc.setText(Object.art.get(position).getDesc());
 
     }
 
