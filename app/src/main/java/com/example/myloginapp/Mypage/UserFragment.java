@@ -92,10 +92,10 @@ public class UserFragment extends Fragment {
         adapter = new ExhibitionViewAdapter();
         adapter2 = new ReviewAdapter();
 
-        featuredRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, true));
+        featuredRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         featuredRecycler.setAdapter(adapter);
 
-        featuredRecycler2.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, true));
+        featuredRecycler2.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         featuredRecycler2.setAdapter(adapter2);
 
 
