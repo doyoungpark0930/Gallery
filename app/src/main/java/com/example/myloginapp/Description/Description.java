@@ -19,8 +19,6 @@ public class Description extends AppCompatActivity {
 
 
 
-
-
     ImageView imageView;
     TextView NameText;
     TextView TimeText;
