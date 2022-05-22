@@ -1,12 +1,12 @@
 package com.example.myloginapp.Description;
 
-public class DscReviewInfo {
+public class DesReviewInfo {
 
     int star;
     String title;
     String evaluation;
 
-    public DscReviewInfo(int star, String title, String evaluation) {
+    public DesReviewInfo(int star, String title, String evaluation) {
         this.star = star;
         this.title = title;
         this.evaluation = evaluation;
