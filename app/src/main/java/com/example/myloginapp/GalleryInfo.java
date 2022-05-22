@@ -3,9 +3,14 @@ package com.example.myloginapp;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import java.util.HashMap;
+import com.example.myloginapp.Description.DscReviewInfo;
 
-public class GalleryInfo {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class GalleryInfo implements Serializable{
 
     private int ArtNum;
     private String name;
@@ -18,11 +23,11 @@ public class GalleryInfo {
     private String Price;
     private int ExhibitionNum;
 
-    public GalleryInfo(String name, String desc, int image) {
-        this.name = name;
-        this.desc = desc;
-        this.image = image;
-    }
+
+    //dscReviewInfo객체형성, 해당 작품에서의 리뷰가 여러개 있기때문.
+    private List<DscReviewInfo> dscReviewInfo = new ArrayList<>();
+
+
 
     //img src를 int로 임시변경 -> url로 바꿀예정
     public GalleryInfo(int ArtNum,String ArtName,String StartPeriod,String EndPeriod,String Price,int SRC,String image,String explanation){
@@ -37,7 +42,7 @@ public class GalleryInfo {
         //this.ExhibitionNum=exhibitionNum; 전시회 번호는 나중에 추가
         this.desc=explanation;
     }
-    StringBuilder PrintArt() {
+    public StringBuilder PrintArt() {
         StringBuilder msg=new StringBuilder();
         msg.append("시작 날짜 : "+getStartPeriod()+"\n종료 날짜 : "+getEndPeriod()+"\n가격 : "+getPrice()+"\n");
         return msg;
@@ -45,8 +50,7 @@ public class GalleryInfo {
     int getArtNum() {
         return ArtNum;
     }
-    //왜 int로 선언..?
-    public Bitmap getImage() {
+   public Bitmap getImage() {
         return Realimage;
     }
     public String getUrl() {return url;}

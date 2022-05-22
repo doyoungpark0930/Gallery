@@ -102,8 +102,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="구독 전시회"
                         android:fontFamily="@font/normal"
+                        android:text="구독 전시회"
                         android:textAllCaps="true"
                         android:textSize="20sp" />
 

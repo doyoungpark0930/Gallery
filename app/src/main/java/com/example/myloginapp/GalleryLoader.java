@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.myloginapp.Description.DscReviewInfo;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,8 +19,10 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class GalleryLoader extends AsyncTask<String, Void, String> {
     String mJsonString;
@@ -105,6 +109,9 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
                 String EndPeriod = item.getString("EndPeriod");
                 String Price = item.getString("Price");
                 String Explanation = item.getString("Explanation");
+                //List<DscReviewInfo> dscReviewInfo = new ArrayList<>();
+                //dscReviewInfo=item.~~해당 리뷰 넣어주세요
+
                 //임시로 test 이미지 삽입.
                 Object.art.add(new GalleryInfo(Integer.parseInt(no), name, StartPeriod, EndPeriod, Price, R.drawable.test, urlStr, Explanation));
             }

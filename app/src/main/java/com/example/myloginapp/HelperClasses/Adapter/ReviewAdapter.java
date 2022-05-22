@@ -25,7 +25,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewHold
 
     @Override
     public void onBindViewHolder(@NonNull ReviewHolder holder, int position) {
-        holder.title.setText(Object.art.get(position).getName());
+        holder.title.setText(Object.art.get(position).getName()); //해당 뷰 객체에 art이름 일단 넣은 것,따라서 리뷰 갯수는 전시 작품의 총 개수만큼 할당 됨. 그럼 수영님이 여기에 구독한 작품에 해당하는 리뷰 값을 넣어야함.
         holder.desc.setText(Object.art.get(position).getDesc());
     }
 
