@@ -1,9 +1,10 @@
 package com.example.myloginapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,8 +17,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myloginapp.Description.Description;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FilterReader;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -25,12 +30,17 @@ public class SearchingGallery extends AppCompatActivity {
     SearchView searchView;
     ListView listView;
 
-//    int images[] = {R.drawable.project_gallery,R.drawable.project_gallery,R.drawable.project_gallery,R.drawable.project_gallery,R.drawable.project_gallery};     //이미지 가져와서 동적으로 넣어줘야함
-//    String names[]={"apple","banana","kiwi","watermelon","orange"};      //여기나중에 동적으로 끌어서 넣어줘야함  ,일단 소문자만 넣어야함
-//    String desc[]={"This is  apple","This is Banana","This is Kiwi","This is Watermelon","This is orange"};  //여기도 동적으로 넣어줘야함
-//    List<GalleryInfo> listItems = new ArrayList<>();
+
+    StringBuilder ArtTime;
+    String getArtTime;
+    byte[] ImageBt;
+    String ArtName;
+    String ArtDsc;
+
+
 
     CustomAdapter customAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +49,7 @@ public class SearchingGallery extends AppCompatActivity {
 
         searchView=findViewById(R.id.search);
         listView=findViewById(R.id.listView);
-/*
-        for(int i=0;i<names.length;i++){
-            GalleryInfo itemsModel = new GalleryInfo(names[i],desc[i],images[i]);
 
-            listItems.add(itemsModel);
-        } */
 
         customAdapter = new CustomAdapter(Object.art,this);
 
@@ -52,6 +57,8 @@ public class SearchingGallery extends AppCompatActivity {
 
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -94,8 +101,8 @@ public class SearchingGallery extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.row_items,null);
+        public View getView(int position, View convertView, ViewGroup parent) { //listview의 해당 뷰에 이미지,이름,설명을 뿌린다
+            View view = getLayoutInflater().inflate(R.layout.row_items,null); //row_items를 view객체로 만든다.
 
             ImageView imageView = view.findViewById(R.id.imageView);
             TextView itemName= view.findViewById(R.id.itemName);
@@ -103,8 +110,27 @@ public class SearchingGallery extends AppCompatActivity {
 
             imageView.setImageBitmap(itemsModelListFiltered.get(position).getImage());
             itemName.setText(itemsModelListFiltered.get(position).getName());
-            itemDesc.setText(itemsModelListFiltered.get(position).PrintArt());
+            itemDesc.setText(itemsModelListFiltered.get(position).PrintArt()); //PrintArt는 시작날짜,종료날짜,가격
 
+            view.setOnClickListener(new View.OnClickListener() { //해당 뷰를 클릭하면 Description클래스로 페이지전환
+                @Override
+                public void onClick(View v) { //해당 뷰 객체의 이미지,설명 이런 것들을 intent를 이용해 넘겨줌
+                    ArtTime=(StringBuilder)  itemsModelListFiltered.get(position).PrintArt(); //Art시간을 받는다
+                    getArtTime=ArtTime.toString(); //StringBuilder라서 직렬화가 가능한 string으로 바꿔줌
+                    ImageBt=bitmap2Bytes(itemsModelListFiltered.get(position).getImage()); //bitmap인 이미지를 byte값으로 변환
+                    ArtName=(String)itemsModelListFiltered.get(position).getName(); //Art이름을 받는다
+                    ArtDsc=(String)itemsModelListFiltered.get(position).getDesc(); //Art설명을 받는다
+
+                    Intent intent=new Intent(SearchingGallery.this, Description.class); //intent를 이용해 Activity전환
+                    //이렇게 putExtra로 값을 전달하고 Description.java에서 getExtra로 값을 받는다
+                    intent.putExtra("ArtTime",getArtTime);
+                    intent.putExtra("Image",ImageBt); //일단 byte값을 넘기고 getExtra에서 byte를 bitmap으로 다시 변환
+                    intent.putExtra("Name",ArtName);
+                    intent.putExtra("ArtInfo",ArtDsc);
+                    startActivity(intent);
+
+                }
+            });
             return view;
         }
 
@@ -121,18 +147,19 @@ public class SearchingGallery extends AppCompatActivity {
                         filterResults.values = itemsModelList;
                     }
                     else {
-                        String searchStr = constraint.toString().toLowerCase();
+                        String searchStr = constraint.toString();
 
                         List<GalleryInfo> resultData = new ArrayList<>();
 
                         for(GalleryInfo itemsModel:itemsModelList){
-                            if(itemsModel.getName().contains(searchStr)|| itemsModel.getDesc().contains(searchStr)){
+                            if(itemsModel.getName().contains(searchStr)|| itemsModel.PrintArt().toString().contains(searchStr)){
                                 resultData.add(itemsModel);
 
                             }
 
                             filterResults.count= resultData.size();
                             filterResults.values= resultData;
+
                         }
                     }
 
@@ -150,5 +177,11 @@ public class SearchingGallery extends AppCompatActivity {
             };
             return filter;
         }
+    }
+
+    private byte[] bitmap2Bytes(Bitmap bitmap) { //Bitmap을 byte형식으로 바꿔주는 메소드
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        return baos.toByteArray();
     }
 }
