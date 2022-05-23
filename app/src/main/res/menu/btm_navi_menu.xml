@@ -10,13 +10,13 @@
         android:id="@+id/tab_map"
         android:enabled="true"
         android:icon="@drawable/ic_map"
-        android:title="탐색"/>
+        android:title="지도"/>
 
     <item
         android:id="@+id/tab_heart"
         android:enabled="true"
-        android:icon="@drawable/ic_heart"
-        android:title="찜"/>
+        android:icon="@drawable/ic_camera"
+        android:title="검색"/>
 
     <item
         android:id="@+id/tab_user"

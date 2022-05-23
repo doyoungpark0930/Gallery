@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(is_checking&&is_valid) { //로그인이 된다면 실행됨
                     forgat.setText("환영합니다 "+Object.user.getId()+"고객님!");
-                    navigateToSearchingGallery();
+//                    navigateToSearchingGallery();
                 }else if(!is_checking){  //로그인이 실패됐다면
                     Toast.makeText(getApplicationContext(), "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show(); //로그인화면으로 왔을시 거기서 ID생성 토스트메시지 띄워줌
                 }else if(!is_valid){
@@ -88,13 +88,13 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-
-    void navigateToSearchingGallery()
-    {
-        finish();
-        Intent intent = new Intent(LoginActivity.this, SearchingGallery.class);
-        startActivity(intent);
-    }
+//
+//    void navigateToSearchingGallery()
+//    {
+//        finish();
+//        Intent intent = new Intent(LoginActivity.this, SearchingGallery.class);
+//        startActivity(intent);
+//    }
     void navigateToSignUpActivity(){
         finish();
         Intent intent = new Intent(LoginActivity.this, SignupActivity.class);

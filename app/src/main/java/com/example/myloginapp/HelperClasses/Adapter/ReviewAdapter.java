@@ -12,6 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewHolder> {
     @NonNull
     @Override
