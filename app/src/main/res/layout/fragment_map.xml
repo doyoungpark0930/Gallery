@@ -13,5 +13,12 @@
         android:name="com.google.android.gms.maps.MapFragment"
         />
 
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/place_autocomplete_fragment"
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+        />
+
 
 </FrameLayout>

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myloginapp.HelperClasses.Adapter.ExhibitionViewAdapter;
+import com.example.myloginapp.HelperClasses.Adapter.RandomExhibitionAdapter;
 import com.example.myloginapp.HelperClasses.Adapter.ReviewAdapter;
 import com.example.myloginapp.R;
 
@@ -79,12 +80,13 @@ public class HomeFragment extends Fragment {
         featuredRecycler2.setHasFixedSize(true);
 
         ExhibitionViewAdapter adapter = new ExhibitionViewAdapter();
+        RandomExhibitionAdapter RanAdapter = new RandomExhibitionAdapter();
 
         featuredRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         featuredRecycler.setAdapter(adapter);
 
         featuredRecycler2.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        featuredRecycler2.setAdapter(adapter);
+        featuredRecycler2.setAdapter(RanAdapter);
 
         return rootView;
     }
