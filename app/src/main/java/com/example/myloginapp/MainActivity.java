@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.myloginapp.Home.HomeActivity;
+import com.example.myloginapp.Map.MapFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     void navigateToLoginActivity(){ //LoginActivity로 가는 함수
         finish();
-        Intent intent = new Intent(MainActivity.this, SearchingGallery.class);
+        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
         startActivity(intent);
     }
 

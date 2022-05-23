@@ -10,11 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.myloginapp.Heart.HeartFragment;
 import com.example.myloginapp.LoginActivity;
-import com.example.myloginapp.MainActivity;
 import com.example.myloginapp.Map.MapFragment;
 import com.example.myloginapp.R;
 import com.example.myloginapp.Mypage.UserFragment;
@@ -38,7 +36,6 @@ public class HomeActivity extends AppCompatActivity {
 
         init();
         SettingListener();
-
     }
 
     private void init(){

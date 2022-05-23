@@ -3,8 +3,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myloginapp">
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <application
 
         android:allowBackup="true"
@@ -16,7 +14,7 @@
         android:theme="@style/Theme.MyLoginApp">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAkUek-DL_hAEURa9FDx5k0Wq-mO7KQzVg" />
+            android:value="AIzaSyDRqKODwGOVp4A8SpiVBomzL91QTc7t0Ns" />
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".SignupActivity"></activity>
         <activity android:name=".SearchingGallery"></activity>
