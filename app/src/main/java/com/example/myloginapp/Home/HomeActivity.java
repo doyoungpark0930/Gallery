@@ -36,7 +36,6 @@ public class HomeActivity extends AppCompatActivity {
 
         init();
         SettingListener();
-
     }
 
     private void init(){

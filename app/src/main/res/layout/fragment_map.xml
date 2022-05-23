@@ -6,18 +6,19 @@
     tools:context=".Map.MapFragment"
     >
 
-    <fragment
-
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/map"
-        tools:context=".Map.MapFragment"
-        xmlns:map="http://schemas.android.com/apk/res-auto"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        map:uiZoomControls="true"
-        map:uiRotateGestures="true"
-        map:cameraTilt="30" />
+        android:name="com.google.android.gms.maps.MapFragment"
+        />
 
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/place_autocomplete_fragment"
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+        />
 
 
 </FrameLayout>
