@@ -1,13 +1,11 @@
 package com.example.myloginapp;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
-import com.example.myloginapp.Description.DscReviewInfo;
+import com.example.myloginapp.Description.DesReviewInfo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class GalleryInfo implements Serializable{
@@ -25,12 +23,12 @@ public class GalleryInfo implements Serializable{
 
 
     //dscReviewInfo객체형성, 해당 작품에서의 리뷰가 여러개 있기때문.
-    private List<DscReviewInfo> dscReviewInfo = new ArrayList<>();
+    private ArrayList<DesReviewInfo> desReviewInfo = new ArrayList<>();
 
 
 
     //img src를 int로 임시변경 -> url로 바꿀예정
-    public GalleryInfo(int ArtNum,String ArtName,String StartPeriod,String EndPeriod,String Price,int SRC,String image,String explanation){
+    public GalleryInfo(int ArtNum,String ArtName,String StartPeriod,String EndPeriod,String Price,int SRC,String image,String explanation,ArrayList<DesReviewInfo> desReviewInfo){
         this.ArtNum=ArtNum;
         this.name=ArtName;
         this.StartPeriod=StartPeriod.replace(".","-");
@@ -41,6 +39,7 @@ public class GalleryInfo implements Serializable{
         this.ExhibitionNum=SRC;
         //this.ExhibitionNum=exhibitionNum; 전시회 번호는 나중에 추가
         this.desc=explanation;
+        this.desReviewInfo=desReviewInfo;
     }
     public StringBuilder PrintArt() {
         StringBuilder msg=new StringBuilder();
@@ -73,4 +72,7 @@ public class GalleryInfo implements Serializable{
         return ExhibitionNum;
     }
     public String getDesc() {return desc;}
+    public ArrayList<DesReviewInfo> getDesReviewInfo() {
+        return desReviewInfo;
+    }
 }

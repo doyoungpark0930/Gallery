@@ -1,23 +1,19 @@
 package com.example.myloginapp;
 
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Log;
 
-import com.example.myloginapp.Description.DscReviewInfo;
+import com.example.myloginapp.Description.DesReviewInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -109,11 +105,14 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
                 String EndPeriod = item.getString("EndPeriod");
                 String Price = item.getString("Price");
                 String Explanation = item.getString("Explanation");
-                //List<DscReviewInfo> dscReviewInfo = new ArrayList<>();
-                //dscReviewInfo=item.~~해당 리뷰 넣어주세요
+                ArrayList<DesReviewInfo> desReviewInfo = new ArrayList<>();  //제가 추가한 것
+                //바로 밑에 주석부분 반복문돌려서 리뷰 값 넣어주세요.
+                //desReviewInfo.add(new DesReviewInfo(item.getInt("star"),item.getString("reviewTitle"),item.getString("reviewEvaluation")));
+                desReviewInfo.add(new DesReviewInfo(1,"abc","def")); //임의로 넣어본 것. 나중에 지워주셈
+                desReviewInfo.add(new DesReviewInfo(5,"ㄹㄹ","ㄴㅇㄹ")); //임의로 넣어본 것
 
                 //임시로 test 이미지 삽입.
-                Object.art.add(new GalleryInfo(Integer.parseInt(no), name, StartPeriod, EndPeriod, Price, R.drawable.test, urlStr, Explanation));
+                Object.art.add(new GalleryInfo(Integer.parseInt(no), name, StartPeriod, EndPeriod, Price, R.drawable.test, urlStr, Explanation,desReviewInfo));
             }
 
         } catch (JSONException e) {

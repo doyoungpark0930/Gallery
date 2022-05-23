@@ -31,11 +31,6 @@ public class SearchingGallery extends AppCompatActivity {
     ListView listView;
 
 
-    StringBuilder ArtTime;
-    String getArtTime;
-    byte[] ImageBt;
-    String ArtName;
-    String ArtDsc;
 
 
 
@@ -115,18 +110,11 @@ public class SearchingGallery extends AppCompatActivity {
             view.setOnClickListener(new View.OnClickListener() { //해당 뷰를 클릭하면 Description클래스로 페이지전환
                 @Override
                 public void onClick(View v) { //해당 뷰 객체의 이미지,설명 이런 것들을 intent를 이용해 넘겨줌
-                    ArtTime=(StringBuilder)  itemsModelListFiltered.get(position).PrintArt(); //Art시간을 받는다
-                    getArtTime=ArtTime.toString(); //StringBuilder라서 직렬화가 가능한 string으로 바꿔줌
-                    ImageBt=bitmap2Bytes(itemsModelListFiltered.get(position).getImage()); //bitmap인 이미지를 byte값으로 변환
-                    ArtName=(String)itemsModelListFiltered.get(position).getName(); //Art이름을 받는다
-                    ArtDsc=(String)itemsModelListFiltered.get(position).getDesc(); //Art설명을 받는다
+
 
                     Intent intent=new Intent(SearchingGallery.this, Description.class); //intent를 이용해 Activity전환
                     //이렇게 putExtra로 값을 전달하고 Description.java에서 getExtra로 값을 받는다
-                    intent.putExtra("ArtTime",getArtTime);
-                    intent.putExtra("Image",ImageBt); //일단 byte값을 넘기고 getExtra에서 byte를 bitmap으로 다시 변환
-                    intent.putExtra("Name",ArtName);
-                    intent.putExtra("ArtInfo",ArtDsc);
+                    intent.putExtra("ObjectPosition",position);
                     startActivity(intent);
 
                 }
@@ -179,9 +167,4 @@ public class SearchingGallery extends AppCompatActivity {
         }
     }
 
-    private byte[] bitmap2Bytes(Bitmap bitmap) { //Bitmap을 byte형식으로 바꿔주는 메소드
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        return baos.toByteArray();
-    }
 }

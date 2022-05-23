@@ -5,18 +5,29 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
+
+import java.util.ArrayList;
 
 public class Description extends AppCompatActivity {
 
-    //리사이클러뷰로가자
+
+    ArrayList<DesReviewInfo> arrayList;
+    DesReviewAdapter desReviewAdapter;
+    RecyclerView recyclerView;
+    LinearLayoutManager linearLayoutManager;
 
 
+    int position;
 
 
     ImageView imageView;
@@ -25,10 +36,6 @@ public class Description extends AppCompatActivity {
     TextView InfoText;
 
 
-    Bitmap ArtImage; //이미지
-    String ArtName; //이름
-    String ArtTime; //시작날짜 ,종료날짜,가격 정보
-    String ArtInfo; //전시정보
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,24 +50,27 @@ public class Description extends AppCompatActivity {
         Intent intent = getIntent(); //액티비티전환해서 넘어올때 해당 intent를 받는다.
 
         if(intent.getExtras()!=null){ //Description.java로 액티비티전환시 넘길때 액티비티의 값을 받음
-            ArtImage=byte2Bitmap(intent.getByteArrayExtra("Image"));
-            ArtName=(String)intent.getSerializableExtra("Name");
-            ArtTime=(String) intent.getSerializableExtra("ArtTime");
-            ArtInfo=(String) intent.getSerializableExtra("ArtInfo");
 
-            imageView.setImageBitmap(ArtImage);
-            NameText.setText(ArtName);
-            TimeText.setText(ArtTime);
-            InfoText.setText(ArtInfo);
+            position=(int)intent.getSerializableExtra("ObjectPosition"); // position값받음
+
+            imageView.setImageBitmap(Object.art.get(position).getImage());
+            NameText.setText(Object.art.get(position).getName());
+            TimeText.setText(Object.art.get(position).PrintArt());
+            InfoText.setText(Object.art.get(position).getDesc());
         }
 
+        //밑에는 리사이클러뷰 관련
+        recyclerView=(RecyclerView) findViewById(R.id.dec_review); //description.xml에서따옴
+        linearLayoutManager=new LinearLayoutManager(this,RecyclerView.HORIZONTAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        arrayList= Object.art.get(position).getDesReviewInfo();
 
+        desReviewAdapter=new DesReviewAdapter(arrayList);
+        recyclerView.setAdapter(desReviewAdapter);
 
 
 
     }
-    private Bitmap byte2Bitmap(byte[] data) { //byte값을 Bitmap으로 변환해주는 메소드
-        return BitmapFactory.decodeByteArray(data, 0, data.length);
-    }
+
 
 }
