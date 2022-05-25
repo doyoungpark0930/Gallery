@@ -1,5 +1,6 @@
 package com.example.myloginapp.Home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,11 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.myloginapp.HelperClasses.Adapter.ExhibitionViewAdapter;
 import com.example.myloginapp.HelperClasses.Adapter.RandomExhibitionAdapter;
 import com.example.myloginapp.HelperClasses.Adapter.ReviewAdapter;
+import com.example.myloginapp.MainActivity;
 import com.example.myloginapp.R;
+import com.example.myloginapp.Search.SearchFragment;
+import com.example.myloginapp.SearchingGallery;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,6 +93,16 @@ public class HomeFragment extends Fragment {
         featuredRecycler2.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         featuredRecycler2.setAdapter(RanAdapter);
 
+        ImageView search = (ImageView) rootView.findViewById(R.id.ic_search);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SearchingGallery.class);
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
+
 }
