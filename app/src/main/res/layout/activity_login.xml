@@ -113,14 +113,10 @@
         android:layout_below="@id/buttonZip"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:text="Forgot password?" />
-
-
-
-
 
 
 </RelativeLayout>
