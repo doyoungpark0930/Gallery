@@ -52,7 +52,8 @@ public class Description extends AppCompatActivity {
         if(intent.getExtras()!=null){ //Description.java로 액티비티전환시 넘길때 액티비티의 값을 받음
 
             position=(int)intent.getSerializableExtra("ObjectPosition"); // position값받음
-
+            //1.일단 이름만 받은다음에, Object.art.get(i) 반복문, 횟수는 Object.art.size. 이름같은것확인.
+            //2.그냥 데이터 싹다 넘기기. 문제는 무엇이냐. getposition이아니라,그냥 Image,Name,ArtTime,ArtInfo로받아와야함
             imageView.setImageBitmap(Object.art.get(position).getImage());
             NameText.setText(Object.art.get(position).getName());
             TimeText.setText(Object.art.get(position).PrintArt());
@@ -63,7 +64,7 @@ public class Description extends AppCompatActivity {
         recyclerView=(RecyclerView) findViewById(R.id.dec_review); //description.xml에서따옴
         linearLayoutManager=new LinearLayoutManager(this,RecyclerView.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        arrayList= Object.art.get(position).getDesReviewInfo();
+        arrayList= Object.art.get(position).getDesReviewInfo(); //해당객체의
 
         desReviewAdapter=new DesReviewAdapter(arrayList);
         recyclerView.setAdapter(desReviewAdapter);
