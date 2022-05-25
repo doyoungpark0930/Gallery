@@ -41,17 +41,14 @@ public class LoginLoader extends AsyncTask<String, Void, String> {
         String postParameters = "id=" + id + "&passwd=" + passwd;
 
         try {
-
             URL url = new URL(serverURL);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-
 
             httpURLConnection.setReadTimeout(5000);
             httpURLConnection.setConnectTimeout(5000);
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoInput(true);
             httpURLConnection.connect();
-
 
             OutputStream outputStream = httpURLConnection.getOutputStream();
             outputStream.write(postParameters.getBytes("UTF-8"));
@@ -86,7 +83,7 @@ public class LoginLoader extends AsyncTask<String, Void, String> {
 
 
         } catch (Exception e) {
-                ;
+                e.printStackTrace();
             return null;
         }
 
@@ -109,7 +106,7 @@ public class LoginLoader extends AsyncTask<String, Void, String> {
             }
 
         } catch (JSONException e) {
-            ;
+            e.printStackTrace();
         }
     }
 }
