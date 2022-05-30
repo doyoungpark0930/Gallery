@@ -188,7 +188,8 @@ public class HomeActivity extends AppCompatActivity {
                 int count;
                 for (GalleryInfo i:Object.art) {
                     count = SearchController.compareFeature(i.getImage(), Bitimg);
-                    Log.d("art",Integer.toString(count));
+                    if(count!=0)
+                        Log.d("art",i.getName());
                 }
                 break;
 

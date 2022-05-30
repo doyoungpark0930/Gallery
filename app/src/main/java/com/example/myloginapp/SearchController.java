@@ -68,18 +68,13 @@ public class SearchController {
         result2=Imgproc.compareHist(histImg1,histImg2,2);
         result3=Imgproc.compareHist(histImg1,histImg2,3);
 
-        Log.v("art","Method [0]"+result0);
-        Log.v("art","Method [1]"+result1);
-        Log.v("art","Method [2]"+result2);
-        Log.v("art","Method [3]"+result3);
-
         int count=0;
         if(result0>0.9) count++;
         if(result1<0.1) count++;
         if(result2>1.5) count++;
         if(result3<0.2) count++;
 
-        if(count>=3) retVal=1;
+        if(count>=2) retVal=1;
         return retVal;
     }
 }
