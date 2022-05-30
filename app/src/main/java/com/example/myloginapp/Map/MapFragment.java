@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 
@@ -53,6 +55,10 @@ import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MapFragment#newInstance} factory method to
@@ -85,6 +91,8 @@ public class MapFragment extends Fragment
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    Location location = new Location("");
 
     public MapFragment() {
         // Required empty public constructor
@@ -186,13 +194,14 @@ public class MapFragment extends Fragment
     public void onStop(){
         super.onStop();
         mapView.onStart();
+        getActivity().finish();
 
         if(googleApiClient != null && googleApiClient.isConnected())
             googleApiClient.disconnect();
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState){
+    public void onSaveInstanceState(@NonNull Bundle outState){
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
@@ -226,7 +235,7 @@ public class MapFragment extends Fragment
     @Override
     public void onDestroy(){
         super.onDestroy();
-        mapView.onDestroy();
+        mapView.onLowMemory();
 
         if(googleApiClient != null){
             googleApiClient.unregisterConnectionCallbacks(this);
@@ -263,7 +272,7 @@ public class MapFragment extends Fragment
         googleMap.getUiSettings().setCompassEnabled(true);
 
         // 매끄럽게 이동함
-      //  googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
         // API 23 이상이면 런타임 퍼미션 처리 필요
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
@@ -717,6 +726,39 @@ public class MapFragment extends Fragment
                         new LatLng(36.91527699550581, 126.87467225076442))
                 .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5))
                 .fillColor(Color.argb((float)0.7, (float)1.0, (float)1.0, (float)1.0)));
+
+
+        /*
+         여기서 DB에서 location 가져와서 인자로 보내주면 됨!
+         */
+        chageLocation("갤러리아포레");
+    }
+
+    public void chageLocation(String address){
+        Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+        List<Address> addresses = null;
+
+        try{
+            // 주소값을 통하여 위치를 받아오기
+            addresses = geocoder.getFromLocationName(address, 1);
+
+            Double Lat = addresses.get(0).getLatitude();
+            Double Lon = addresses.get(0).getLongitude();
+
+            // 해당 위치로 좌표를 구성한다.
+            LatLng newLatLng = new LatLng(Lat, Lon);
+
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(newLatLng);
+            markerOptions.title(address);
+            markerOptions.snippet("markerSnippet");
+            markerOptions.draggable(true);
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
+            currentMarker = this.googleMap.addMarker(markerOptions);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private void buildGoogleApiClient(){
@@ -751,18 +793,20 @@ public class MapFragment extends Fragment
         result.setResultCallback(new ResultCallback<PlaceLikelihoodBuffer>() {
             @Override
             public void onResult(@NonNull PlaceLikelihoodBuffer placeLikelihoods) {
+                Log.e(TAG, "현재 위치 받아옴...");
                 int i = 0;
                 LikelyPlaceNames = new String[MAXENTRIES];
                 LikelyAddresses = new String[MAXENTRIES];
                 LikelyAttributions = new String[MAXENTRIES];
                 LikelyLatLngs = new LatLng[MAXENTRIES];
 
-                for(PlaceLikelihood placeLikelihood: placeLikelihoods){
+                for(PlaceLikelihood placeLikelihood: placeLikelihoods){  // 이 for 문이 실행되지 않음....
                     LikelyPlaceNames[i] = (String) placeLikelihood.getPlace().getName();
                     LikelyAddresses[i] = (String) placeLikelihood.getPlace().getAddress();
                     LikelyAttributions[i] = (String) placeLikelihood.getPlace().getAttributions();
                     LikelyLatLngs[i] = placeLikelihood.getPlace().getLatLng();
 
+                    Log.e(TAG, "현재 위치 받아옴...");
                     i++;
                     if(i > MAXENTRIES - 1){
                         break;
@@ -771,7 +815,6 @@ public class MapFragment extends Fragment
 
                 placeLikelihoods.release();
 
-                Location location = new Location("");
                 if(LikelyLatLngs[0] != null) {
                     location.setLatitude(LikelyLatLngs[0].latitude);
                     location.setLongitude(LikelyLatLngs[0].longitude);
@@ -818,7 +861,7 @@ public class MapFragment extends Fragment
         else{
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
             this.googleMap.getUiSettings().setCompassEnabled(true);
-            //this.googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+            this.googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
         }
     }
 
