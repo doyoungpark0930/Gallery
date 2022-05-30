@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -15,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
+import com.example.myloginapp.Review.ReviewActivity;
+import com.example.myloginapp.SearchingGallery;
 
 import java.util.ArrayList;
 
@@ -34,7 +38,7 @@ public class Description extends AppCompatActivity {
     TextView NameText;
     TextView TimeText;
     TextView InfoText;
-
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,15 @@ public class Description extends AppCompatActivity {
         desReviewAdapter=new DesReviewAdapter(arrayList);
         recyclerView.setAdapter(desReviewAdapter);
 
+        button = (Button) findViewById(R.id.review_button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Description.this, ReviewActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

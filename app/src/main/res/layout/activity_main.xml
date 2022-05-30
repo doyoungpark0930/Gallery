@@ -9,37 +9,38 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="226dp"
         android:layout_marginStart="125dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="137dp"
-        android:layout_marginBottom="350dp"
         app:srcCompat="@drawable/project_gallery" />
 
     <TextView
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_below="@+id/imageView"
         android:layout_marginStart="125dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="137dp"
-        android:layout_marginBottom="265dp"
         android:fontFamily="@font/normal"
+        android:gravity="center"
         android:text="한눈의 갤러리"
         android:textColor="@color/black"
         android:textSize="25sp" />
 
     <Button
         android:id="@+id/getStarted"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="149dp"
+        android:layout_height="59dp"
+        android:layout_below="@+id/email"
         android:layout_marginStart="125dp"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="21dp"
         android:layout_marginEnd="137dp"
         android:layout_marginBottom="100dp"
         android:fontFamily="@font/normal"
+        android:gravity="center"
         android:text="GET STARTED >" />
 
 

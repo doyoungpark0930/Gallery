@@ -26,6 +26,7 @@
         <activity android:name=".SearchingGallery"></activity>
         <activity android:name=".Home.HomeActivity"></activity>
         <activity android:name=".Description.Description"></activity>
+        <activity android:name=".Review.ReviewActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -10,10 +10,13 @@
       <map>
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Gallery/app/src/main/res/layout/activity_login.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Gallery/app/src/main/res/layout/activity_signup.xml" value="0.10131712259371833" />
+        <entry key="..\:/Users/choheejin/Gallery/fork/Gallery/app/src/main/res/drawable/review_button.xml" value="0.2175" />
         <entry key="..\:/Users/choheejin/Gallery/fork/Gallery/app/src/main/res/font/font.xml" value="0.13541666666666666" />
         <entry key="..\:/Users/choheejin/Gallery/fork/Gallery/app/src/main/res/layout/activity_home.xml" value="0.1" />
-        <entry key="..\:/Users/choheejin/Gallery/fork/Gallery/app/src/main/res/layout/activity_main.xml" value="0.15052083333333333" />
+        <entry key="..\:/Users/choheejin/Gallery/fork/Gallery/app/src/main/res/layout/activity_main.xml" value="0.8800000000000001" />
         <entry key="..\:/Users/choheejin/Gallery/fork/Gallery/app/src/main/res/layout/activity_signup.xml" value="0.12335359675785208" />
+        <entry key="..\:/Users/choheejin/Gallery/fork/Gallery/app/src/main/res/layout/activtiy_review.xml" value="0.2375" />
+        <entry key="..\:/Users/choheejin/Gallery/fork/Gallery/app/src/main/res/layout/description.xml" value="0.336283185840708" />
         <entry key="..\:/Users/choheejin/Gallery/fork/Gallery/app/src/main/res/layout/featured_card_design.xml" value="0.2653061224489796" />
         <entry key="..\:/Users/choheejin/Gallery/fork/Gallery/app/src/main/res/layout/featured_review_desgin.xml" value="0.7364185110663984" />
         <entry key="..\:/Users/choheejin/Gallery/fork/Gallery/app/src/main/res/layout/fragment_heart.xml" value="0.22192028985507245" />
