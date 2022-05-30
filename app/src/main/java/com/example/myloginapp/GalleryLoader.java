@@ -2,6 +2,7 @@ package com.example.myloginapp;
 
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Gallery;
 
 import com.example.myloginapp.Description.DesReviewInfo;
@@ -105,20 +106,32 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
 
                 String no = item.getString("no");
                 String name = item.getString("name");
-                String urlStr=item.getString("url");
-                String StartPeriod = item.getString("StartPeriod").replace(" ","");
+                String urlStr = item.getString("url");
+                String StartPeriod = item.getString("StartPeriod").replace(" ", "");
                 String EndPeriod = item.getString("EndPeriod");
                 String Price = item.getString("Price");
                 String Explanation = item.getString("Explanation");
+                String ExhibitionName = item.getString("location");
                 ArrayList<DesReviewInfo> desReviewInfo = new ArrayList<>();  //제가 추가한 것
                 //바로 밑에 주석부분 반복문돌려서 리뷰 값 넣어주세요.
                 //desReviewInfo.add(new DesReviewInfo(item.getInt("star"),item.getString("reviewTitle"),item.getString("reviewEvaluation")));
-                desReviewInfo.add(new DesReviewInfo(1,"abc","def")); //임의로 넣어본 것. 나중에 지워주셈
-                desReviewInfo.add(new DesReviewInfo(5,"ㄹㄹ","ㄴㅇㄹ")); //임의로 넣어본 것
+                desReviewInfo.add(new DesReviewInfo(1, "abc", "def")); //임의로 넣어본 것. 나중에 지워주셈
+                desReviewInfo.add(new DesReviewInfo(5, "ㄹㄹ", "ㄴㅇㄹ")); //임의로 넣어본 것
+                EndPeriod=EndPeriod.replace(".","-");
 
-                Object.art.add(new GalleryInfo(Integer.parseInt(no), name, StartPeriod, EndPeriod, Price, urlStr, Explanation,desReviewInfo));
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                Date currentTime = new Date();
+                try {
+                    Date date = format.parse(EndPeriod);
+                    Log.v("tag", String.valueOf(date));
+                    if (currentTime.before(date)) {
+                        Log.v("tag",name);
+                        Object.art.add(new GalleryInfo(Integer.parseInt(no), name, StartPeriod, EndPeriod, Price, urlStr, Explanation, ExhibitionName, desReviewInfo));
+                    }
+                }catch(Exception e) {
+                    e.printStackTrace();
+                }
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

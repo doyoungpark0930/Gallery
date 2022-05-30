@@ -28,6 +28,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.myloginapp.GalleryInfo;
 import com.example.myloginapp.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -57,6 +58,7 @@ import com.google.android.gms.maps.model.PolygonOptions;
 
 import java.io.IOException;
 import java.util.List;
+import com.example.myloginapp.Object;
 import java.util.Locale;
 
 /**
@@ -731,7 +733,10 @@ public class MapFragment extends Fragment
         /*
          여기서 DB에서 location 가져와서 인자로 보내주면 됨!
          */
-        chageLocation("갤러리아포레");
+
+        for(GalleryInfo i:Object.art){
+            chageLocation(i.getExhibitionName());
+        }
     }
 
     public void chageLocation(String address){

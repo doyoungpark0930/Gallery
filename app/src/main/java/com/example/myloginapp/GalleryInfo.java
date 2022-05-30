@@ -19,13 +19,13 @@ public class GalleryInfo implements Serializable{
     private String EndPeriod;
     private String Price;
     private int ExhibitionNum;
-
+    private String ExhibitionName;
 
     //dscReviewInfo객체형성, 해당 작품에서의 리뷰가 여러개 있기때문.
     private ArrayList<DesReviewInfo> desReviewInfo = new ArrayList<>();
 
     //img src를 int로 임시변경 -> url로 바꿀예정
-    public GalleryInfo(int ArtNum,String ArtName,String StartPeriod,String EndPeriod,String Price,String image,String explanation,ArrayList<DesReviewInfo> desReviewInfo){
+    public GalleryInfo(int ArtNum,String ArtName,String StartPeriod,String EndPeriod,String Price,String image,String explanation,String ExhibitionName,ArrayList<DesReviewInfo> desReviewInfo){
         this.ArtNum=ArtNum;
         this.name=ArtName;
         this.StartPeriod=StartPeriod.replace(".","-");
@@ -36,12 +36,14 @@ public class GalleryInfo implements Serializable{
         //this.ExhibitionNum=exhibitionNum; 전시회 번호는 나중에 추가
         this.desc=explanation;
         this.desReviewInfo=desReviewInfo;
+        this.ExhibitionName=ExhibitionName;
     }
     public StringBuilder PrintArt() {
         StringBuilder msg=new StringBuilder();
         msg.append("시작 날짜 : "+getStartPeriod()+"\n종료 날짜 : "+getEndPeriod()+"\n가격 : "+getPrice()+"\n");
         return msg;
     }
+    public String getExhibitionName() {return ExhibitionName;}
     public int getArtNum() {
         return ArtNum;
     }
