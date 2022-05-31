@@ -2,6 +2,8 @@ package com.example.myloginapp;
 
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.Gallery;
 
 import com.example.myloginapp.Description.DesReviewInfo;
 
@@ -15,9 +17,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 public class GalleryLoader extends AsyncTask<String, Void, String> {
@@ -34,6 +39,7 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
             Collections.sort(Object.art, new ArtComparator());
         }
     }
+
     @Override
     protected String doInBackground(String... params) {
 
@@ -100,21 +106,32 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
 
                 String no = item.getString("no");
                 String name = item.getString("name");
-                String urlStr=item.getString("url");
-                String StartPeriod = item.getString("StartPeriod").replace(" ","");
+                String urlStr = item.getString("url");
+                String StartPeriod = item.getString("StartPeriod").replace(" ", "");
                 String EndPeriod = item.getString("EndPeriod");
                 String Price = item.getString("Price");
                 String Explanation = item.getString("Explanation");
+                String ExhibitionName = item.getString("location");
                 ArrayList<DesReviewInfo> desReviewInfo = new ArrayList<>();  //제가 추가한 것
                 //바로 밑에 주석부분 반복문돌려서 리뷰 값 넣어주세요.
                 //desReviewInfo.add(new DesReviewInfo(item.getInt("star"),item.getString("reviewTitle"),item.getString("reviewEvaluation")));
-                desReviewInfo.add(new DesReviewInfo(1,"abc","def")); //임의로 넣어본 것. 나중에 지워주셈
-                desReviewInfo.add(new DesReviewInfo(5,"ㄹㄹ","ㄴㅇㄹ")); //임의로 넣어본 것
+                desReviewInfo.add(new DesReviewInfo(1, "abc", "def")); //임의로 넣어본 것. 나중에 지워주셈
+                desReviewInfo.add(new DesReviewInfo(5, "ㄹㄹ", "ㄴㅇㄹ")); //임의로 넣어본 것
+                EndPeriod=EndPeriod.replace(".","-");
 
-                //임시로 test 이미지 삽입.
-                Object.art.add(new GalleryInfo(Integer.parseInt(no), name, StartPeriod, EndPeriod, Price, R.drawable.test, urlStr, Explanation,desReviewInfo));
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                Date currentTime = new Date();
+                try {
+                    Date date = format.parse(EndPeriod);
+                    Log.v("tag", String.valueOf(date));
+                    if (currentTime.before(date)) {
+                        Log.v("tag",name);
+                        Object.art.add(new GalleryInfo(Integer.parseInt(no), name, StartPeriod, EndPeriod, Price, urlStr, Explanation, ExhibitionName, desReviewInfo));
+                    }
+                }catch(Exception e) {
+                    e.printStackTrace();
+                }
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -138,6 +155,7 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
                 return Integer.parseInt(str1[0]) - Integer.parseInt(str2[0]);
         }
     }
+
     public class ImageLoader extends AsyncTask<String, Void, String> {
 
         @Override

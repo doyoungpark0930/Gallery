@@ -1,0 +1,33 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- 평상시 -->
+
+    <item>
+        <shape>
+            <solid android:color="#fff" /> //배경색
+
+            <stroke
+                android:width="1dp"
+                android:color="#6200EE" /> //선색
+            <corners android:radius="5dp"/> // 선 휘는각도
+        </shape>
+    </item>
+
+<!--    &lt;!&ndash; 클릭했을 때 &ndash;&gt;-->
+<!--    <item android:state_pressed="true">-->
+<!--        <shape>-->
+<!--            &lt;!&ndash; 배경 &ndash;&gt;-->
+<!--            <solid android:color="#ff000000" />-->
+<!--            &lt;!&ndash; 테두리 &ndash;&gt;-->
+<!--            <stroke-->
+<!--                android:width="1dp"-->
+<!--                android:color="#ff888888" />-->
+<!--            &lt;!&ndash; 코너 둥근 정도 &ndash;&gt;-->
+<!--            <corners-->
+<!--                android:bottomLeftRadius="30dp"-->
+<!--                android:bottomRightRadius="30dp"-->
+<!--                android:topLeftRadius="30dp"-->
+<!--                android:topRightRadius="30dp" />-->
+<!--        </shape>-->
+<!--    </item>-->
+</selector>
+
