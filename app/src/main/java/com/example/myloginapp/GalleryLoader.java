@@ -3,9 +3,6 @@ package com.example.myloginapp;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Gallery;
-
-import com.example.myloginapp.Description.DesReviewInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,13 +14,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
 
 public class GalleryLoader extends AsyncTask<String, Void, String> {
     String mJsonString;
@@ -41,7 +36,7 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
     }
 
     @Override
-    protected String doInBackground(String... params) {
+    public String doInBackground(String... params) {
 
         String serverURL = (String) params[0];
         String postParameters = (String) params[1];

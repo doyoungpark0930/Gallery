@@ -9,8 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
+import com.example.myloginapp.DesReviewInfo;
 
 import java.util.ArrayList;
 

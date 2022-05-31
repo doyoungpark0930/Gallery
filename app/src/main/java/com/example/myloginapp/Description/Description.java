@@ -1,14 +1,11 @@
 package com.example.myloginapp.Description;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
 import com.example.myloginapp.Review.ReviewActivity;
-import com.example.myloginapp.SearchingGallery;
+import com.example.myloginapp.DesReviewInfo;
 
 import java.util.ArrayList;
 
@@ -51,12 +48,13 @@ public class Description extends AppCompatActivity {
         InfoText=findViewById(R.id.artInfo);
 
 
+
         Intent intent = getIntent(); //액티비티전환해서 넘어올때 해당 intent를 받는다.
 
         if(intent.getExtras()!=null){ //Description.java로 액티비티전환시 넘길때 액티비티의 값을 받음
 
             position=(int)intent.getSerializableExtra("ObjectPosition"); // position값받음
-
+            Log.v("art",Integer.toString(position));
             imageView.setImageBitmap(Object.art.get(position).getImage());
             NameText.setText(Object.art.get(position).getName());
             TimeText.setText(Object.art.get(position).PrintArt());

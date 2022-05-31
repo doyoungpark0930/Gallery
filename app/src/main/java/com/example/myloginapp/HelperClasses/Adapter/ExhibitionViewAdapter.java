@@ -23,8 +23,6 @@ import java.io.ByteArrayOutputStream;
 
 public class ExhibitionViewAdapter extends RecyclerView.Adapter<ExhibitionViewAdapter.Holder>{
 
-
-
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

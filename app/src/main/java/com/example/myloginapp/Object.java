@@ -10,9 +10,7 @@ public class Object {
 	static public Bitmap Bitimg;
 	static public ArrayList<GalleryInfo> art=new ArrayList<GalleryInfo>();
     static ArrayList<ExhibitionInfo> exhibition=new ArrayList<ExhibitionInfo>();
-	static ArrayList<LocationInfo> location=new ArrayList<LocationInfo>();
-	static ArrayList<ProvinceInfo> province=new ArrayList<ProvinceInfo>();
-	static ArrayList<ReviewInfo> review=new ArrayList<ReviewInfo>();
+	static ArrayList<DesReviewInfo> review=new ArrayList<DesReviewInfo>();
 	static ArrayList<UserInfo> userlist=new ArrayList<UserInfo>();
 	static public UserInfo user; //로그인한 사용자 정보를 담을 객체
 

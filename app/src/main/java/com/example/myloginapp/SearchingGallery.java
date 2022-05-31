@@ -29,11 +29,6 @@ import java.util.List;
 public class SearchingGallery extends AppCompatActivity {
     SearchView searchView;
     ListView listView;
-
-
-
-
-
     CustomAdapter customAdapter;
 
 
@@ -44,7 +39,6 @@ public class SearchingGallery extends AppCompatActivity {
 
         searchView=findViewById(R.id.search);
         listView=findViewById(R.id.listView);
-
 
         customAdapter = new CustomAdapter(Object.art,this);
 

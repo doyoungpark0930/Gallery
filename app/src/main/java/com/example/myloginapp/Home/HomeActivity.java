@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.example.myloginapp.Description.Description;
 import com.example.myloginapp.GalleryInfo;
 import com.example.myloginapp.Object;
 import androidx.annotation.NonNull;
@@ -25,12 +27,12 @@ import com.example.myloginapp.Map.MapFragment;
 import com.example.myloginapp.Mypage.UserFragment;
 import com.example.myloginapp.R;
 import com.example.myloginapp.SearchController;
+import com.example.myloginapp.SearchingGallery;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
     final String TAG = this.getClass().getSimpleName();
     // 로그인 화면으로 넘어가고 싶다면, false
-    static boolean isLogged = false;
 
     private static final int REQUEST_CAMERA = 100;
     private static final int SINGLE_PERMISSION=1004;
@@ -87,7 +89,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 case R.id.tab_user: {
 
-                        if (isLogged) {
+                        if (Object.user!=null) {
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.home_ly, new UserFragment())
                                     .commit();
@@ -185,11 +187,20 @@ public class HomeActivity extends AppCompatActivity {
             case REQUEST_CAMERA:
                 Bundle extras = data.getExtras();
                 Bitmap Bitimg = (Bitmap) extras.get("data");
+
+                SearchController sc= new SearchController();
                 int count;
-                for (GalleryInfo i:Object.art) {
-                    count = SearchController.compareFeature(i.getImage(), Bitimg);
-                    if(count!=0)
-                        Log.d("art",i.getName());
+                for (int i=0;i<Object.art.size();i++) {
+                    count = sc.compareFeature(Object.art.get(i).getImage(), Bitimg);
+                    if(count!=0) {
+                        //Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+                        Intent intent=new Intent(this, Description.class); //intent를 이용해 Activity전환
+                        //이렇게 putExtra로 값을 전달하고 Description.java에서 getExtra로 값을 받는다
+                        intent.putExtra("ObjectPosition",i);
+                        Log.v("art",Object.art.get(i).getName());
+                        startActivity(intent);
+                        break;
+                    }
                 }
                 break;
 

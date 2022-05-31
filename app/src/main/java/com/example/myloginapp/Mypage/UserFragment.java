@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myloginapp.HelperClasses.Adapter.ExhibitionViewAdapter;
 import com.example.myloginapp.HelperClasses.Adapter.ReviewAdapter;
 import com.example.myloginapp.R;
+import com.example.myloginapp.Object;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +36,7 @@ public class UserFragment extends Fragment {
     private RecyclerView featuredRecycler;
     private RecyclerView featuredRecycler2;
 
-    private ExhibitionViewAdapter adapter;
+    private SubscribeViewAdapter adapter;
 
     private ReviewAdapter adapter2;
 
@@ -89,7 +90,7 @@ public class UserFragment extends Fragment {
         featuredRecycler.setHasFixedSize(true);
         featuredRecycler2.setHasFixedSize(true);
 
-        adapter = new ExhibitionViewAdapter();
+        adapter = new SubscribeViewAdapter();
         adapter2 = new ReviewAdapter();
 
         featuredRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
@@ -100,8 +101,8 @@ public class UserFragment extends Fragment {
 
 
         imageView.setImageResource(R.drawable.profile);
-        textView1.setText("test id");
-        textView2.setText("test message");
+        textView1.setText(Object.user.getId());
+        textView2.setText(Object.user.getEmail());
 
         Log.e("Frag", "마이페이지 recycler");
         return rootView;

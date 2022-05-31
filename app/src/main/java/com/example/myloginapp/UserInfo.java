@@ -18,10 +18,10 @@ public class UserInfo {
     int getUserNum(){
         return userNum;
     }
-    String getId() {
+    public String getId() {
         return id;
     }
-    String getEmail(){
+    public String getEmail(){
         return email;
     }
 }
