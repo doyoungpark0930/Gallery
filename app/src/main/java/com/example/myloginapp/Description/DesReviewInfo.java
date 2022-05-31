@@ -1,6 +1,8 @@
 package com.example.myloginapp.Description;
 
-public class DesReviewInfo {
+import java.io.Serializable;
+
+public class DesReviewInfo implements Serializable {
 
     int star;
     String title;
