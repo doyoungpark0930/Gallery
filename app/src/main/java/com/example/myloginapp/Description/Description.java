@@ -61,8 +61,9 @@ public class Description extends AppCompatActivity {
 
 
 
-            //static으로 선언된 Galleryinfo객체를 이름이같은것 등으로 탐색을 시도한다면, 계산하는데 오래걸릴것같아 ,클릭하면 putExtra로 해당 뷰의 객체를 넘겨받는 식으로 구현
-
+            //position=(int)intent.getSerializableExtra("ObjectPosition"); // position값받음
+            //1.static으로 선언된 Galleryinfo객체를 이름이같은것 등으로 탐색을 시도한다면, 계산하는데 오래걸릴것같아
+            //클릭하면, putExtra로 해당 뷰의 객체를 넘겨받는 식으로 구현
 
 
             ArtImage=byte2Bitmap(intent.getByteArrayExtra("Image"));
@@ -76,9 +77,6 @@ public class Description extends AppCompatActivity {
             InfoText.setText(ArtInfo);
 
             arrayList= ReviewList; //넘겨줄때 해당 object.art의 getDesReviewInfo를 넘겨줘야함
-
-
-
 
         }
 

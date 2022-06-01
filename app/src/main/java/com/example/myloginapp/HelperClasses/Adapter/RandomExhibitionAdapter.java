@@ -12,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+
 import com.example.myloginapp.DesReviewInfo;
+
 
 import com.example.myloginapp.Description.Description;
 import com.example.myloginapp.Object;
@@ -75,12 +77,15 @@ public class RandomExhibitionAdapter extends RecyclerView.Adapter<RandomExhibiti
                 @Override
                 public void onClick(View v) {
                     int position=getAdapterPosition(); //클릭된 현재 뷰의 position. 4번쨰클릭하면 Object.art.get(4)가들어가는데, 그렇게 들어가지않고 해당 들어간 랜덤값의 position이 들어가야함
+
+
                     ArtTime=(StringBuilder)  Object.art.get(position).PrintArt();
                     getArtTime=ArtTime.toString(); //StringBuilder인 ArtTime을 String형으로 변경
                     ImageBt=bitmap2Bytes(Object.art.get(position).getImage()); //bitmap인 이미지를 byte값으로 변환
                     ArtName=(String)Object.art.get(position).getName();
                     ArtDsc=(String)Object.art.get(position).getDesc();
                     ReviewList=(ArrayList<DesReviewInfo>) Object.art.get(position).getDesReviewInfo();
+
 
 
 
