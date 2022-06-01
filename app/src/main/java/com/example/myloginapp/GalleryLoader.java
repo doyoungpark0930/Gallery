@@ -1,5 +1,11 @@
 package com.example.myloginapp;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import android.annotation.SuppressLint;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -19,54 +25,47 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.concurrent.Executor;
 
 public class GalleryLoader extends AsyncTask<String, Void, String> {
-    String mJsonString;
 
-    @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
-        if(result!=null){
-            mJsonString = result;
-            showResult();
-            ImageLoader image =new ImageLoader();
-            image.execute();
-            Collections.sort(Object.art, new ArtComparator());
-        }
-    }
+    public static JSONObject jsonObject;
+    JSONArray jsonArray;
+    static int Initcnt;
+    static int DBcnt;
 
+    HttpURLConnection httpURLConnection;
+    int responseStatusCode;
+    OutputStream outputStream;
+    InputStream inputStream;
+
+    @SuppressLint("WrongThread")
     @Override
     public String doInBackground(String... params) {
 
         String serverURL = (String) params[0];
         String postParameters = (String) params[1];
         try {
-
             URL url = new URL(serverURL);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-
+            httpURLConnection = (HttpURLConnection) url.openConnection();
 
             httpURLConnection.setReadTimeout(5000);
             httpURLConnection.setConnectTimeout(5000);
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.connect();
 
-
-            OutputStream outputStream = httpURLConnection.getOutputStream();
+            outputStream = httpURLConnection.getOutputStream();
             outputStream.write(postParameters.getBytes("UTF-8"));
             outputStream.flush();
             outputStream.close();
 
+            responseStatusCode = httpURLConnection.getResponseCode();
 
-            int responseStatusCode = httpURLConnection.getResponseCode();
-
-            InputStream inputStream;
             if (responseStatusCode == HttpURLConnection.HTTP_OK) {
                 inputStream = httpURLConnection.getInputStream();
             } else {
                 inputStream = httpURLConnection.getErrorStream();
             }
-
 
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -78,22 +77,69 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
                 sb.append(line);
             }
 
-
+            Initcnt = showResult(sb.toString());
+            ImageLoader image = new ImageLoader();
+            image.execute();
+            Collections.sort(Object.art, new ArtComparator());
             bufferedReader.close();
 
+            while (true) {
 
-            return sb.toString();
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
 
 
+                outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+
+                responseStatusCode = httpURLConnection.getResponseCode();
+
+
+                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                } else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+
+                inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                bufferedReader = new BufferedReader(inputStreamReader);
+                sb = new StringBuilder();
+                line = null;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+                jsonObject = new JSONObject(sb.toString());
+                jsonArray = jsonObject.getJSONArray("ArtTable");
+
+                if (jsonObject.length() != Initcnt) {
+                    Log.v("art", Integer.toString(Initcnt) + DBcnt);
+                    Initcnt++;
+                    showResult(sb.toString());
+                    image = new ImageLoader();
+                    image.execute();
+                    Collections.sort(Object.art, new ArtComparator());
+
+                }
+            }
         } catch (Exception e) {
 
             return new String("Error: " + e.getMessage());
         }
     }
-    private void showResult() {
+    private int showResult(String mJsonString) {
         try {
-            JSONObject jsonObject = new JSONObject(mJsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray("ArtTable");
+            Object.art.clear();
+            jsonObject = new JSONObject(mJsonString);
+            jsonArray = jsonObject.getJSONArray("ArtTable");
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -112,7 +158,7 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
                 //desReviewInfo.add(new DesReviewInfo(item.getInt("star"),item.getString("reviewTitle"),item.getString("reviewEvaluation")));
                 desReviewInfo.add(new DesReviewInfo(1, "abc", "def")); //임의로 넣어본 것. 나중에 지워주셈
                 desReviewInfo.add(new DesReviewInfo(5, "ㄹㄹ", "ㄴㅇㄹ")); //임의로 넣어본 것
-                EndPeriod=EndPeriod.replace(".","-");
+                EndPeriod = EndPeriod.replace(".", "-");
 
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 Date currentTime = new Date();
@@ -120,17 +166,20 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
                     Date date = format.parse(EndPeriod);
                     Log.v("tag", String.valueOf(date));
                     if (currentTime.before(date)) {
-                        Log.v("tag",name);
+                        Log.v("tag", name);
                         Object.art.add(new GalleryInfo(Integer.parseInt(no), name, StartPeriod, EndPeriod, Price, urlStr, Explanation, ExhibitionName, desReviewInfo));
                     }
-                }catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        return DBcnt;
     }
+
     //정렬기능을 수행하기 위한 클래스로, 임시로 이곳에 배치
 //도영님이 정렬 페이지를 만들어 올리는 즉시 그쪽으로 이동예정.
     class ArtComparator implements Comparator<GalleryInfo> {
@@ -139,7 +188,7 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
             String[] str1 = o1.getStartPeriod().split("-");
             String[] str2 = o2.getStartPeriod().split("-");
 
-            if(str1.length<2||str2.length<2)
+            if (str1.length < 2 || str2.length < 2)
                 return -1;
             if (Integer.parseInt(str1[0]) == Integer.parseInt(str2[0])) {
                 if (Integer.parseInt(str1[1]) == Integer.parseInt(str2[1])) {
@@ -157,7 +206,7 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... strings) {
             try {
 
-                for(int i=0;i<Object.art.size();i++) {
+                for (int i = 0; i < Object.art.size(); i++) {
                     URL url = new URL(Object.art.get(i).getUrl());
                     Object.art.get(i).setImage(BitmapFactory.decodeStream(url.openConnection().getInputStream()));
                 }
@@ -169,3 +218,19 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
         }
     }
 }
+/*
+    public static class DBLoader extends Thread{
+        public String mJsonString;
+        JSONArray jsonArray;
+        public DBLoader(String jsonString){
+            mJsonString=jsonString;
+        }
+        public void run(){
+            Initcnt=showResult();
+            Log.v("art",Integer.toString(Initcnt)+" "+Integer.toString(DBcnt));
+            while(true) {
+                ;
+            }
+        }
+
+    }*/

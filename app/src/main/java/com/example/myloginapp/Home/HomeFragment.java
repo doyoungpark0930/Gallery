@@ -97,6 +97,7 @@ public class HomeFragment extends Fragment {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(getActivity(), SearchingGallery.class);
                 startActivity(intent);
             }

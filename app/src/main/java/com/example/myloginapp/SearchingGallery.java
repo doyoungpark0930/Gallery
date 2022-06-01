@@ -31,7 +31,6 @@ public class SearchingGallery extends AppCompatActivity {
     ListView listView;
     CustomAdapter customAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

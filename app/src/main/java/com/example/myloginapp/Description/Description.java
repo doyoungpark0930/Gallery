@@ -49,9 +49,9 @@ public class Description extends AppCompatActivity {
 
 
 
-        Intent intent = getIntent(); //액티비티전환해서 넘어올때 해당 intent를 받는다.
+        Intent intent = getIntent();
 
-        if(intent.getExtras()!=null){ //Description.java로 액티비티전환시 넘길때 액티비티의 값을 받음
+        if(intent.getExtras()!=null){
 
             position=(int)intent.getSerializableExtra("ObjectPosition"); // position값받음
             Log.v("art",Integer.toString(position));
