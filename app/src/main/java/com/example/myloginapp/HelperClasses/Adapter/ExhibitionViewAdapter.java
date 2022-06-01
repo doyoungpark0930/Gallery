@@ -1,9 +1,6 @@
 package com.example.myloginapp.HelperClasses.Adapter;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myloginapp.Description.Description;
-import com.example.myloginapp.Home.HomeFragment;
-import com.example.myloginapp.R;
 import com.example.myloginapp.Object;
-import com.example.myloginapp.SearchingGallery;
-
-import java.io.ByteArrayOutputStream;
+import com.example.myloginapp.R;
 
 public class ExhibitionViewAdapter extends RecyclerView.Adapter<ExhibitionViewAdapter.Holder>{
 
