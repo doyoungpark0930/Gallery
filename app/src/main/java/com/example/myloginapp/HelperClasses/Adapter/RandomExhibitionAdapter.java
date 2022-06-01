@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myloginapp.Description.DesReviewInfo;
+import com.example.myloginapp.DesReviewInfo;
 import com.example.myloginapp.Description.Description;
 import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
@@ -80,7 +80,9 @@ public class RandomExhibitionAdapter extends RecyclerView.Adapter<RandomExhibiti
                     ArtName=(String)Object.art.get(position).getName();
                     ArtDsc=(String)Object.art.get(position).getDesc();
                     ReviewList=(ArrayList<DesReviewInfo>) Object.art.get(position).getDesReviewInfo();
+
                     Intent intent=new Intent(v.getContext(),Description.class); //intent를 이용해 Activity전환
+
                     //이렇게 putExtra로 값을 전달하고 Description.java에서 GetExtra로 값을 받는다
                     intent.putExtra("ArtTime",getArtTime);
                     intent.putExtra("Image",ImageBt); //일단 byte값을 넘기고 getExtra에서 byte를 bitmap으로 다시 변환

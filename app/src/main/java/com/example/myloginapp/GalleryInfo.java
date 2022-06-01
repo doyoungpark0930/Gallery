@@ -2,11 +2,8 @@ package com.example.myloginapp;
 
 import android.graphics.Bitmap;
 
-import com.example.myloginapp.Description.DesReviewInfo;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GalleryInfo implements Serializable{
 
@@ -40,7 +37,7 @@ public class GalleryInfo implements Serializable{
     }
     public StringBuilder PrintArt() {
         StringBuilder msg=new StringBuilder();
-        msg.append("시작 날짜 : "+getStartPeriod()+"\n종료 날짜 : "+getEndPeriod()+"\n가격 : "+getPrice()+"\n");
+        msg.append("전시회장 :"+getExhibitionName()+"\n시작 날짜 : "+getStartPeriod()+"\n종료 날짜 : "+getEndPeriod()+"\n가격 : "+getPrice()+"\n");
         return msg;
     }
     public String getExhibitionName() {return ExhibitionName;}

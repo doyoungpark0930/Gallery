@@ -4,11 +4,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
 import com.example.myloginapp.Review.ReviewActivity;
-import com.example.myloginapp.SearchingGallery;
+import com.example.myloginapp.DesReviewInfo;
 
 import java.util.ArrayList;
 
@@ -54,13 +53,14 @@ public class Description extends AppCompatActivity {
         InfoText=findViewById(R.id.artInfo);
 
 
+
         Intent intent = getIntent(); //액티비티전환해서 넘어올때 해당 intent를 받는다.
 
         if(intent.getExtras()!=null){ //Description.java로 액티비티전환시 넘길때 액티비티의 값을 받음
 
-            //position=(int)intent.getSerializableExtra("ObjectPosition"); // position값받음
-            //1.static으로 선언된 Galleryinfo객체를 이름이같은것 등으로 탐색을 시도한다면, 계산하는데 오래걸릴것같아
-            //클릭하면, putExtra로 해당 뷰의 객체를 넘겨받는 식으로 구현
+
+
+            //static으로 선언된 Galleryinfo객체를 이름이같은것 등으로 탐색을 시도한다면, 계산하는데 오래걸릴것같아 ,클릭하면 putExtra로 해당 뷰의 객체를 넘겨받는 식으로 구현
 
             ArtImage=byte2Bitmap(intent.getByteArrayExtra("Image"));
             ArtName=(String)intent.getSerializableExtra("Name");
@@ -73,6 +73,8 @@ public class Description extends AppCompatActivity {
             InfoText.setText(ArtInfo);
 
             arrayList= ReviewList; //넘겨줄때 해당 object.art의 getDesReviewInfo를 넘겨줘야함
+
+
         }
 
         //밑에는 리사이클러뷰 관련
