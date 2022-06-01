@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myloginapp.Home.HomeActivity;
 import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
 import com.example.myloginapp.Review.ReviewActivity;
@@ -32,7 +33,7 @@ public class Description extends AppCompatActivity {
 
     int position;
 
-
+    ImageView back2main;
     ImageView imageView;
     TextView NameText;
     TextView TimeText;
@@ -72,16 +73,24 @@ public class Description extends AppCompatActivity {
         recyclerView.setAdapter(desReviewAdapter);
 
         button = (Button) findViewById(R.id.review_button);
+        back2main = (ImageView) findViewById(R.id.back2main);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Description.this, ReviewActivity.class);
+                intent.putExtra("ObjectPosition", position);
                 startActivity(intent);
             }
         });
 
-
+        back2main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Description.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
