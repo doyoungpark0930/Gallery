@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class UserFragment extends Fragment {
     private TextView textView1;
     private TextView textView2;
     private ImageView imageView;
+    private ImageButton subscribeButton;
 
     private RecyclerView featuredRecycler;
     private RecyclerView featuredRecycler2;
@@ -83,6 +85,7 @@ public class UserFragment extends Fragment {
         imageView =  (ImageView) rootView.findViewById(R.id.profile_image);
         textView1 = (TextView) rootView.findViewById(R.id.profile_id);
         textView2 = (TextView) rootView.findViewById(R.id.profile_message);
+        subscribeButton=(ImageButton) rootView.findViewById(R.id.subscribeButton);
 
         featuredRecycler = (RecyclerView) rootView.findViewById(R.id.featured_recycler);
         featuredRecycler2 = (RecyclerView) rootView.findViewById(R.id.featured_recycler2);
@@ -103,6 +106,14 @@ public class UserFragment extends Fragment {
         imageView.setImageResource(R.drawable.profile);
         textView1.setText(Object.user.getId());
         textView2.setText(Object.user.getEmail());
+
+
+        subscribeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("hello","world");
+            }
+        });
 
         Log.e("Frag", "마이페이지 recycler");
         return rootView;

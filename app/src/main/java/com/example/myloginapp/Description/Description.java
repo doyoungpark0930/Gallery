@@ -1,6 +1,8 @@
 package com.example.myloginapp.Description;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,8 +30,11 @@ public class Description extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager;
 
 
-    int position;
-
+    Bitmap ArtImage; //이미지
+    String ArtName; //이름
+    String ArtTime; //시작날짜 ,종료날짜,가격 정보
+    String ArtInfo; //전시정보
+    ArrayList<DesReviewInfo> ReviewList;
 
     ImageView imageView;
     TextView NameText;
@@ -53,19 +58,33 @@ public class Description extends AppCompatActivity {
 
         if(intent.getExtras()!=null){
 
-            position=(int)intent.getSerializableExtra("ObjectPosition"); // position값받음
-            Log.v("art",Integer.toString(position));
-            imageView.setImageBitmap(Object.art.get(position).getImage());
-            NameText.setText(Object.art.get(position).getName());
-            TimeText.setText(Object.art.get(position).PrintArt());
-            InfoText.setText(Object.art.get(position).getDesc());
+
+
+
+            //position=(int)intent.getSerializableExtra("ObjectPosition"); // position값받음
+            //1.static으로 선언된 Galleryinfo객체를 이름이같은것 등으로 탐색을 시도한다면, 계산하는데 오래걸릴것같아
+            //클릭하면, putExtra로 해당 뷰의 객체를 넘겨받는 식으로 구현
+
+
+            ArtImage=byte2Bitmap(intent.getByteArrayExtra("Image"));
+            ArtName=(String)intent.getSerializableExtra("Name");
+            ArtTime=(String) intent.getSerializableExtra("ArtTime");
+            ArtInfo=(String) intent.getSerializableExtra("ArtInfo");
+            ReviewList=(ArrayList<DesReviewInfo>) intent.getSerializableExtra("ReviewList");
+            imageView.setImageBitmap(ArtImage);
+            NameText.setText(ArtName);
+            TimeText.setText(ArtTime);
+            InfoText.setText(ArtInfo);
+
+            arrayList= ReviewList; //넘겨줄때 해당 object.art의 getDesReviewInfo를 넘겨줘야함
+
         }
 
         //밑에는 리사이클러뷰 관련
         recyclerView=(RecyclerView) findViewById(R.id.dec_review); //description.xml에서따옴
         linearLayoutManager=new LinearLayoutManager(this,RecyclerView.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        arrayList= Object.art.get(position).getDesReviewInfo();
+
 
         desReviewAdapter=new DesReviewAdapter(arrayList);
         recyclerView.setAdapter(desReviewAdapter);
@@ -84,4 +103,7 @@ public class Description extends AppCompatActivity {
     }
 
 
+    private Bitmap byte2Bitmap(byte[] data) { //byte값을 Bitmap으로 변환해주는 메소드
+        return BitmapFactory.decodeByteArray(data, 0, data.length);
+    }
 }

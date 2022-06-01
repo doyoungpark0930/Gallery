@@ -1,6 +1,11 @@
 package com.example.myloginapp;
 
-public class DesReviewInfo {
+import java.io.Serializable;
+
+
+
+
+public class DesReviewInfo implements Serializable {
 
     int usernum;
     int artnum;
