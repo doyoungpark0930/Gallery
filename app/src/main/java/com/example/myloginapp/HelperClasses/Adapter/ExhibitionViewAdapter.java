@@ -13,8 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-//import com.example.myloginapp.Description.DesReviewInfo;
 import com.example.myloginapp.DesReviewInfo;
+
+
 import com.example.myloginapp.Description.Description;
 import com.example.myloginapp.Home.HomeFragment;
 import com.example.myloginapp.R;
@@ -72,6 +73,7 @@ public class ExhibitionViewAdapter extends RecyclerView.Adapter<ExhibitionViewAd
                     ArtName=(String)Object.art.get(position).getName();
                     ArtDsc=(String)Object.art.get(position).getDesc();
                     ReviewList=(ArrayList<DesReviewInfo>) Object.art.get(position).getDesReviewInfo();
+
 
                     Intent intent=new Intent(v.getContext(),Description.class); //intent를 이용해 Activity전환
 
