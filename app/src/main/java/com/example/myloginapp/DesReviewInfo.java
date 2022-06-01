@@ -2,6 +2,7 @@ package com.example.myloginapp;
 
 import java.io.Serializable;
 
+
 public class DesReviewInfo implements Serializable {
 
     int usernum;

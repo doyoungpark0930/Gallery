@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-//import com.example.myloginapp.Description.DesReviewInfo;
+
 import com.example.myloginapp.Description.Description;
 
 import java.io.ByteArrayOutputStream;
@@ -124,7 +124,6 @@ public class SearchingGallery extends AppCompatActivity {
                     ArtName=(String)itemsModelListFiltered.get(position).getName();
                     ArtDsc=(String)itemsModelListFiltered.get(position).getDesc();
                     ReviewList=(ArrayList<DesReviewInfo>) itemsModelListFiltered.get(position).getDesReviewInfo();
-
 
                     Intent intent=new Intent(SearchingGallery.this, Description.class); //intent를 이용해 Activity전환
                     //이렇게 putExtra로 값을 전달하고 Description.java에서 GetExtra로 값을 받는다
