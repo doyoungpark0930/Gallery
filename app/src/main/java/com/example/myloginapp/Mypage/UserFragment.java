@@ -13,10 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myloginapp.HelperClasses.Adapter.ExhibitionViewAdapter;
 import com.example.myloginapp.HelperClasses.Adapter.ReviewAdapter;
-import com.example.myloginapp.R;
 import com.example.myloginapp.Object;
+import com.example.myloginapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
