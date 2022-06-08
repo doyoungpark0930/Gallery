@@ -13,10 +13,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myloginapp.DesReviewInfo;
+import com.example.myloginapp.GalleryInfo;
 import com.example.myloginapp.HelperClasses.Adapter.ExhibitionViewAdapter;
 import com.example.myloginapp.HelperClasses.Adapter.ReviewAdapter;
 import com.example.myloginapp.R;
 import com.example.myloginapp.Object;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,7 +98,14 @@ public class UserFragment extends Fragment {
         featuredRecycler2.setHasFixedSize(true);
 
         adapter = new SubscribeViewAdapter();
-        adapter2 = new ReviewAdapter();
+        ArrayList<DesReviewInfo> tmp=new ArrayList<DesReviewInfo>();
+        for(DesReviewInfo i : Object.review){
+            for(GalleryInfo j: Object.art){
+                if(i.getArtnum()==j.getNum())
+                    tmp.add(i);
+            }
+        }
+        adapter2 = new ReviewAdapter(tmp);
 
         featuredRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         featuredRecycler.setAdapter(adapter);

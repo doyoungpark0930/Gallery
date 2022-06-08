@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
 import com.example.myloginapp.DesReviewInfo;
 
@@ -18,9 +18,9 @@ public class DesReviewAdapter extends RecyclerView.Adapter<DesReviewAdapter.Cust
 
     private ArrayList<DesReviewInfo> arrayList;
 
-    public DesReviewAdapter(ArrayList<DesReviewInfo> arrayList) {
-        this.arrayList = arrayList;
-    }
+    public DesReviewAdapter(ArrayList<DesReviewInfo> review) {
+        this.arrayList = review;
+    } //이거 수정
 
     @NonNull
     @Override

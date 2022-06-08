@@ -14,12 +14,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myloginapp.GalleryInfo;
 import com.example.myloginapp.Home.HomeActivity;
 import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
 import com.example.myloginapp.Review.ReviewActivity;
 import com.example.myloginapp.DesReviewInfo;
+import com.example.myloginapp.UserInfo;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Description extends AppCompatActivity {
@@ -69,7 +72,14 @@ public class Description extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         arrayList= Object.art.get(position).getDesReviewInfo();
 
-        desReviewAdapter=new DesReviewAdapter(arrayList);
+        ArrayList<DesReviewInfo> tmp=new ArrayList<DesReviewInfo>();
+        for(DesReviewInfo i : Object.review){
+            for(GalleryInfo j: Object.art){
+                if(i.getArtnum()==j.getNum())
+                    tmp.add(i);
+            }
+        }
+        desReviewAdapter=new DesReviewAdapter(tmp);
         recyclerView.setAdapter(desReviewAdapter);
 
         button = (Button) findViewById(R.id.review_button);

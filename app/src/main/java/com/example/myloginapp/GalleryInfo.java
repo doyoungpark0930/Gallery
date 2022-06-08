@@ -16,7 +16,7 @@ public class GalleryInfo implements Serializable{
     private String EndPeriod;
     private String Price;
     private int ExhibitionNum;
-    private String ExhibitionName;
+    private String ExhibitionName; // 없앨 예정.
 
     //dscReviewInfo객체형성, 해당 작품에서의 리뷰가 여러개 있기때문.
     private ArrayList<DesReviewInfo> desReviewInfo = new ArrayList<>();
@@ -41,7 +41,7 @@ public class GalleryInfo implements Serializable{
         return msg;
     }
     public String getExhibitionName() {return ExhibitionName;}
-    public int getArtNum() {
+    public int getNum() {
         return ArtNum;
     }
    public Bitmap getImage() {
