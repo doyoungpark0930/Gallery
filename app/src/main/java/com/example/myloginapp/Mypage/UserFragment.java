@@ -13,9 +13,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.example.myloginapp.DesReviewInfo;
+import com.example.myloginapp.GalleryInfo;
+import com.example.myloginapp.HelperClasses.Adapter.ExhibitionViewAdapter;
+
 import com.example.myloginapp.HelperClasses.Adapter.ReviewAdapter;
 import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +39,6 @@ public class UserFragment extends Fragment {
     private TextView textView1;
     private TextView textView2;
     private ImageView imageView;
-    private ImageButton subscribeButton;
 
     private RecyclerView featuredRecycler;
     private RecyclerView featuredRecycler2;
@@ -84,7 +90,6 @@ public class UserFragment extends Fragment {
         imageView =  (ImageView) rootView.findViewById(R.id.profile_image);
         textView1 = (TextView) rootView.findViewById(R.id.profile_id);
         textView2 = (TextView) rootView.findViewById(R.id.profile_message);
-        subscribeButton=(ImageButton) rootView.findViewById(R.id.subscribeButton);
 
         featuredRecycler = (RecyclerView) rootView.findViewById(R.id.featured_recycler);
         featuredRecycler2 = (RecyclerView) rootView.findViewById(R.id.featured_recycler2);
@@ -93,7 +98,14 @@ public class UserFragment extends Fragment {
         featuredRecycler2.setHasFixedSize(true);
 
         adapter = new SubscribeViewAdapter();
-        adapter2 = new ReviewAdapter();
+        ArrayList<DesReviewInfo> tmp=new ArrayList<DesReviewInfo>();
+        for(DesReviewInfo i : Object.review){
+            for(GalleryInfo j: Object.art){
+                if(i.getArtnum()==j.getNum())
+                    tmp.add(i);
+            }
+        }
+        adapter2 = new ReviewAdapter(tmp);
 
         featuredRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         featuredRecycler.setAdapter(adapter);
@@ -106,13 +118,6 @@ public class UserFragment extends Fragment {
         textView1.setText(Object.user.getId());
         textView2.setText(Object.user.getEmail());
 
-
-        subscribeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.v("hello","world");
-            }
-        });
 
         Log.e("Frag", "마이페이지 recycler");
         return rootView;

@@ -11,16 +11,6 @@ public class ExhibitionInfo {
 		this.siteURL=siteURL;
 		this.LocationNum=loc;
 	}
-	/*
-	public String PrintExh() {
-		   for(LocationInfo tmp: Object.location) {
-			   if(tmp.getLocNum()==LocationNum) {
-					   return this.ExhibitionName+" : "+tmp.getCity();
-				}
-		   }
-		return this.ExhibitionName+" : ";
-	}
-	*/
 	public int getLocationNum(){
 		return LocationNum;
 	}

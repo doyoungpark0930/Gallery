@@ -15,7 +15,7 @@ public class UserInfo {
         this.email = email;
     }
     String getPasswd(){ return passwd; }
-    int getUserNum(){
+    public int getNum(){
         return userNum;
     }
     public String getId() {

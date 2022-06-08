@@ -52,8 +52,6 @@ public class ExhibitionViewAdapter extends RecyclerView.Adapter<ExhibitionViewAd
                 @Override
                 public void onClick(View v) {
                     int position=getAdapterPosition(); //클릭된 현재 뷰의 position
-
-
                     Intent intent=new Intent(v.getContext(),Description.class); //프래그먼트에서 액티비티로 화면전환할때는 HomeFragment가아닌 context로 받아야한다.
                     //밑에와 같이 putExtra로 값을 전달하고 Description.java에서 getExtra로 값을 받는다
                     intent.putExtra("ObjectPosition",position);

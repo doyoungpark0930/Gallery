@@ -24,11 +24,12 @@ public class ReviewInsertLoader extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
 
-        String id = (String) params[1];
-        String passwd = (String) params[2];
-        String email = (String) params[3];
+        String usernum = (String) params[1];
+        String artnum = (String) params[2];
+        String text = (String) params[3];
+        String rating =(String) params[4];
         String serverURL = (String) params[0];
-        String postParameters = "id=" + id + "&passwd=" + passwd + "&email=" + email;
+        String postParameters = "usernum=" + usernum + "&artnum=" + artnum +"&text"+text+"&rating=" + rating;
 
         try {
 

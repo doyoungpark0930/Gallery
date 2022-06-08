@@ -10,6 +10,10 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myloginapp.Description.DesReviewAdapter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,13 +31,14 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.concurrent.Executor;
 
-public class GalleryLoader extends AsyncTask<String, Void, String> {
+public class GalleryLoader extends AsyncTask<String, Long, String> {
 
     public static JSONObject jsonObject;
     JSONArray jsonArray;
     static int Initcnt;
     static int DBcnt;
-
+    DesReviewAdapter desReviewAdapter;
+    RecyclerView recyclerView;
     HttpURLConnection httpURLConnection;
     int responseStatusCode;
     OutputStream outputStream;
@@ -179,7 +184,32 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
 
         return DBcnt;
     }
+    @Override
+    protected void onProgressUpdate(Long... values) {
+        desReviewAdapter=new DesReviewAdapter(Object.review);
+        recyclerView.setAdapter(desReviewAdapter);
+    }
+    private void showReview(String mJsonString) {
 
+        try {
+            Object.review.clear();
+            jsonObject = new JSONObject(mJsonString);
+            jsonArray = jsonObject.getJSONArray("ReviewTable");
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject item = jsonArray.getJSONObject(i);
+
+                String usernum = item.getString("usernum");
+                String artnum = item.getString("usernum");
+                String review = item.getString("review");
+                int star = item.getInt("star");
+                Object.review.add(new DesReviewInfo(Integer.parseInt(usernum), Integer.parseInt(artnum), review, star));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
     //정렬기능을 수행하기 위한 클래스로, 임시로 이곳에 배치
 //도영님이 정렬 페이지를 만들어 올리는 즉시 그쪽으로 이동예정.
     class ArtComparator implements Comparator<GalleryInfo> {
@@ -232,5 +262,7 @@ public class GalleryLoader extends AsyncTask<String, Void, String> {
                 ;
             }
         }
-
+Intent intent = new Intent(Description.this, ReviewActivity.class);
+                intent.putExtra("ObjectPosition", position);
+                startActivity(intent);
     }*/
