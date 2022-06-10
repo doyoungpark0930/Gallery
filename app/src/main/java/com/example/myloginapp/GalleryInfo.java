@@ -2,11 +2,8 @@ package com.example.myloginapp;
 
 import android.graphics.Bitmap;
 
-import com.example.myloginapp.Description.DesReviewInfo;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GalleryInfo implements Serializable{
 
@@ -19,7 +16,7 @@ public class GalleryInfo implements Serializable{
     private String EndPeriod;
     private String Price;
     private int ExhibitionNum;
-    private String ExhibitionName;
+    private String ExhibitionName; // 없앨 예정.
 
     //dscReviewInfo객체형성, 해당 작품에서의 리뷰가 여러개 있기때문.
     private ArrayList<DesReviewInfo> desReviewInfo = new ArrayList<>();
@@ -40,11 +37,11 @@ public class GalleryInfo implements Serializable{
     }
     public StringBuilder PrintArt() {
         StringBuilder msg=new StringBuilder();
-        msg.append("시작 날짜 : "+getStartPeriod()+"\n종료 날짜 : "+getEndPeriod()+"\n가격 : "+getPrice()+"\n");
+        msg.append("전시회장 :"+getExhibitionName()+"\n시작 날짜 : "+getStartPeriod()+"\n종료 날짜 : "+getEndPeriod()+"\n가격 : "+getPrice()+"\n");
         return msg;
     }
     public String getExhibitionName() {return ExhibitionName;}
-    public int getArtNum() {
+    public int getNum() {
         return ArtNum;
     }
    public Bitmap getImage() {

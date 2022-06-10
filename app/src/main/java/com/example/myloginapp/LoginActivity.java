@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myloginapp.Mypage.UserFragment;
 import com.google.android.material.button.MaterialButton;
 
 import org.json.JSONArray;
@@ -33,8 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
     String id;
-    String passwd;
-    public static String IP_ADDRESS = "113.198.138.221"; //현재 나의 ip번호 -> 서버로 변경할 예정임.
+    String passwd; //현재 나의 ip번호 -> 서버로 변경할 예정임.
     TextView forgat;
 
     @Override
@@ -42,13 +42,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         TextView username = (TextView) findViewById(R.id.username);
         TextView password = (TextView) findViewById(R.id.password);
         forgat=(TextView)findViewById(R.id.forgotpass);
         MaterialButton loginbtn = (MaterialButton) findViewById(R.id.loginbtn);
         MaterialButton signupbtn = (MaterialButton) findViewById(R.id.signupbtn);
-        LoginLoader loginLoader = new LoginLoader();
-        loginLoader.execute("http://" + IP_ADDRESS + "/select.php",id, passwd);
 
         SharedPreferences auto=getSharedPreferences("autoLogin", Activity.MODE_PRIVATE);
         SharedPreferences.Editor autoLoginEdit = auto.edit();
@@ -63,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     id = username.getText().toString();
                     passwd = password.getText().toString();
-
+                    Log.v("art",Integer.toString(Object.userlist.size()));
                     boolean is_checking = false;
                     boolean is_valid = false;
                     for (UserInfo user : Object.userlist) {
@@ -101,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
     void navigateToSearchingGallery()
     {
         finish();
-        Intent intent = new Intent(LoginActivity.this, SearchingGallery.class);
+        Intent intent = new Intent(LoginActivity.this, UserFragment.class);
         startActivity(intent);
     }
     void navigateToSignUpActivity(){

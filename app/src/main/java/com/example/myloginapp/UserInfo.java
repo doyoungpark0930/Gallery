@@ -15,13 +15,13 @@ public class UserInfo {
         this.email = email;
     }
     String getPasswd(){ return passwd; }
-    int getUserNum(){
+    public int getNum(){
         return userNum;
     }
-    String getId() {
+    public String getId() {
         return id;
     }
-    String getEmail(){
+    public String getEmail(){
         return email;
     }
 }

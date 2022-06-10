@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,9 +13,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.example.myloginapp.DesReviewInfo;
+import com.example.myloginapp.GalleryInfo;
 import com.example.myloginapp.HelperClasses.Adapter.ExhibitionViewAdapter;
+
 import com.example.myloginapp.HelperClasses.Adapter.ReviewAdapter;
+import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +43,7 @@ public class UserFragment extends Fragment {
     private RecyclerView featuredRecycler;
     private RecyclerView featuredRecycler2;
 
-    private ExhibitionViewAdapter adapter;
+    private SubscribeViewAdapter adapter;
 
     private ReviewAdapter adapter2;
 
@@ -89,8 +97,15 @@ public class UserFragment extends Fragment {
         featuredRecycler.setHasFixedSize(true);
         featuredRecycler2.setHasFixedSize(true);
 
-        adapter = new ExhibitionViewAdapter();
-        adapter2 = new ReviewAdapter();
+        adapter = new SubscribeViewAdapter();
+        ArrayList<DesReviewInfo> tmp=new ArrayList<DesReviewInfo>();
+        for(DesReviewInfo i : Object.review){
+            for(GalleryInfo j: Object.art){
+                if(i.getArtnum()==j.getNum())
+                    tmp.add(i);
+            }
+        }
+        adapter2 = new ReviewAdapter(tmp);
 
         featuredRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         featuredRecycler.setAdapter(adapter);
@@ -100,8 +115,9 @@ public class UserFragment extends Fragment {
 
 
         imageView.setImageResource(R.drawable.profile);
-        textView1.setText("test id");
-        textView2.setText("test message");
+        textView1.setText(Object.user.getId());
+        textView2.setText(Object.user.getEmail());
+
 
         Log.e("Frag", "마이페이지 recycler");
         return rootView;

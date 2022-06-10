@@ -1,4 +1,4 @@
-package com.example.myloginapp.HelperClasses.Adapter;
+package com.example.myloginapp.Mypage;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,19 +14,17 @@ import com.example.myloginapp.Description.Description;
 import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
 
-public class ExhibitionViewAdapter extends RecyclerView.Adapter<ExhibitionViewAdapter.Holder>{
 
-
+public class SubscribeViewAdapter extends RecyclerView.Adapter<SubscribeViewAdapter.Holder>{
 
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.featured_card_design, parent, false);
-
-        Holder featuredViewHolder = new Holder(view);
-        return featuredViewHolder;
+        Holder Holder = new Holder(view);
+        return Holder;
     }
-    /**/
+
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         holder.image.setImageBitmap(Object.art.get(position).getImage());
@@ -44,15 +42,13 @@ public class ExhibitionViewAdapter extends RecyclerView.Adapter<ExhibitionViewAd
         public TextView title, desc;
         public ImageView image;
 
-
-
         public Holder(@NonNull View view){
             super(view);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position=getAdapterPosition(); //클릭된 현재 뷰의 position
-                    Intent intent=new Intent(v.getContext(),Description.class); //프래그먼트에서 액티비티로 화면전환할때는 HomeFragment가아닌 context로 받아야한다.
+                    Intent intent=new Intent(v.getContext(), Description.class); //프래그먼트에서 액티비티로 화면전환할때는 HomeFragment가아닌 context로 받아야한다.
                     //밑에와 같이 putExtra로 값을 전달하고 Description.java에서 getExtra로 값을 받는다
                     intent.putExtra("ObjectPosition",position);
                     v.getContext().startActivity(intent);

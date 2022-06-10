@@ -90,13 +90,14 @@ public class HomeFragment extends Fragment {
         featuredRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         featuredRecycler.setAdapter(adapter);
 
-        featuredRecycler2.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        featuredRecycler2.setAdapter(RanAdapter);
+//        featuredRecycler2.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+//        featuredRecycler2.setAdapter(RanAdapter);
 
         ImageView search = (ImageView) rootView.findViewById(R.id.ic_search);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(getActivity(), SearchingGallery.class);
                 startActivity(intent);
             }

@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import com.example.myloginapp.Description.Description;
 
 import java.io.ByteArrayOutputStream;
@@ -32,10 +33,15 @@ public class SearchingGallery extends AppCompatActivity {
 
 
 
+    StringBuilder ArtTime;
+    String getArtTime;
+    byte[] ImageBt;
+    String ArtName;
+    String ArtDsc;
+    ArrayList<DesReviewInfo> ReviewList; //해당 뷰 객체의 리뷰리스트
 
 
     CustomAdapter customAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +50,6 @@ public class SearchingGallery extends AppCompatActivity {
 
         searchView=findViewById(R.id.search);
         listView=findViewById(R.id.listView);
-
 
         customAdapter = new CustomAdapter(Object.art,this);
 
@@ -106,7 +111,6 @@ public class SearchingGallery extends AppCompatActivity {
             imageView.setImageBitmap(itemsModelListFiltered.get(position).getImage());
             itemName.setText(itemsModelListFiltered.get(position).getName());
             itemDesc.setText(itemsModelListFiltered.get(position).PrintArt()); //PrintArt는 시작날짜,종료날짜,가격
-
             view.setOnClickListener(new View.OnClickListener() { //해당 뷰를 클릭하면 Description클래스로 페이지전환
                 @Override
                 public void onClick(View v) { //해당 뷰 객체의 이미지,설명 이런 것들을 intent를 이용해 넘겨줌
