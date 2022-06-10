@@ -28,7 +28,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.myloginapp.GalleryInfo;
 import com.example.myloginapp.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -70,7 +69,7 @@ public class MapFragment extends Fragment
         implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
-    private static final LatLng DEFAULT_LOCATION = new LatLng(37.56, 126.97);
+    private static final LatLng DEFAULT_LOCATION = new LatLng(36.625556070330695, 127.45436091904772);
     private static final String TAG = "googlemap";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 2002;
@@ -268,13 +267,13 @@ public class MapFragment extends Fragment
         this.googleMap = googleMap;
 
         // 런타임 퍼미션 요청 대회상잔나 GPS 활성 요청 대화상자 보이기 전에 지도의 초기위치를 서울로 이동
-        setCurrentLoation(null, "위치정보 가져올 수 없음", "위치 퍼미션과 GPS 활성 여부 확인");
+        setCurrentLoation(null, "충북대학교", "전자정보대학 3관");
 
         // 나침반이 나타나도록 설정
         googleMap.getUiSettings().setCompassEnabled(true);
 
         // 매끄럽게 이동함
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(17));
 
         // API 23 이상이면 런타임 퍼미션 처리 필요
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
@@ -318,8 +317,7 @@ public class MapFragment extends Fragment
                         new LatLng(34.28303551106315, 126.78014133250936),
                         new LatLng(34.30648520382429, 125.95691138480376),
                         new LatLng(35.32481453797089, 126.40571784671474))
-                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5))
-                .fillColor(Color.argb((float)0.7, (float)1.0, (float)1.0, (float)1.0)));
+                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5)));
 
         // 경상남도 polygon
         Polygon polygon2 = googleMap.addPolygon(new PolygonOptions()
@@ -348,8 +346,7 @@ public class MapFragment extends Fragment
                         new LatLng(35.05956745448312, 128.648296950287),
                         new LatLng(35.04076675592524, 129.11638356141745),
                         new LatLng(35.33834071603831, 129.3662266573699))
-                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5))
-                .fillColor(Color.argb((float)0.7, (float)1.0, (float)1.0, (float)1.0)));
+                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5)));
 
         // 경상북도 polygon
         Polygon polygon3 = googleMap.addPolygon(new PolygonOptions()
@@ -382,8 +379,7 @@ public class MapFragment extends Fragment
                         new LatLng(35.652067120467606, 129.05113873594797),
                         new LatLng(35.72527545434019, 129.15202560285155),
                         new LatLng(35.65419366361914, 129.25468995668683))
-                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5))
-                .fillColor(Color.argb((float)0.7, (float)1.0, (float)1.0, (float)1.0)));
+                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5)));
 
         // 전라북도 polygon
         Polygon polygon4 = googleMap.addPolygon(new PolygonOptions()
@@ -425,8 +421,7 @@ public class MapFragment extends Fragment
                         new LatLng(35.85172501841209, 126.45410627007301),
                         new LatLng(35.97884838224812, 126.50716339636958),
                         new LatLng(35.99771791508185, 126.62061293930239))
-                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5))
-                .fillColor(Color.argb((float)0.7, (float)1.0, (float)1.0, (float)1.0)));
+                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5)));
 
         // 강원도 polygon
         Polygon polygon5 = googleMap.addPolygon(new PolygonOptions()
@@ -509,8 +504,7 @@ public class MapFragment extends Fragment
                         new LatLng(37.90094353083103 , 128.83550073628493),
                         new LatLng(37.68272186189873 , 129.06224874071958),
                         new LatLng(37.38623565360066 , 129.25929938964754))
-                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5))
-                .fillColor(Color.argb((float)0.7, (float)1.0, (float)1.0, (float)1.0)));
+                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5)));
 
         // 경기도 polygon
         Polygon polygon6 = googleMap.addPolygon(new PolygonOptions()
@@ -580,8 +574,7 @@ public class MapFragment extends Fragment
                         new LatLng(38.13992130900193 , 127.22083977507495),
                         new LatLng(38.18495487867324 , 127.18591178459664),
                         new LatLng(38.242650729908654 , 127.15973993724508))
-                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5))
-                .fillColor(Color.argb((float)0.7, (float)1.0, (float)1.0, (float)1.0)));
+                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5)));
 
         // 충청북도 polygon
         Polygon polygon7 = googleMap.addPolygon(new PolygonOptions()
@@ -649,8 +642,7 @@ public class MapFragment extends Fragment
                         new LatLng(36.93084439051541, 128.43918534010004),
                         new LatLng(37.0310447865901, 128.71006386487437),
                         new LatLng(37.061386525743856, 128.84025308755884))
-                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5))
-                .fillColor(Color.argb((float)0.7, (float)1.0, (float)1.0, (float)1.0)));
+                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5)));
 
         // 충청남도 polygon
         Polygon polygon8 = googleMap.addPolygon(new PolygonOptions()
@@ -726,16 +718,14 @@ public class MapFragment extends Fragment
                         new LatLng(36.96373183830195, 127.11318981769719),
                         new LatLng(36.929183453572676, 126.98958405265988),
                         new LatLng(36.91527699550581, 126.87467225076442))
-                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5))
-                .fillColor(Color.argb((float)0.7, (float)1.0, (float)1.0, (float)1.0)));
+                .strokeColor(Color.argb((float)0.8, (float)0.0, (float)0.3, (float)0.5)));
 
 
-        /*
-         여기서 DB에서 location 가져와서 인자로 보내주면 됨!
-         */
+        for(int i = 0; i < Object.art.size(); i++) {
+            if((i == 24) || (i == 57) || (i == 65) || (i == 68) || (i == 81) || (i == 85) || (i == 86) || (i == 97))
+                continue;
 
-        for(GalleryInfo i:Object.art){
-            chageLocation(i.getExhibitionName());
+            chageLocation(Object.art.get(i).getExhibitionName());
         }
     }
 
@@ -746,6 +736,7 @@ public class MapFragment extends Fragment
         try{
             // 주소값을 통하여 위치를 받아오기
             addresses = geocoder.getFromLocationName(address, 1);
+            System.out.println(addresses);
 
             Double Lat = addresses.get(0).getLatitude();
             Double Lon = addresses.get(0).getLongitude();
@@ -756,7 +747,6 @@ public class MapFragment extends Fragment
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(newLatLng);
             markerOptions.title(address);
-            markerOptions.snippet("markerSnippet");
             markerOptions.draggable(true);
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
 
@@ -866,7 +856,7 @@ public class MapFragment extends Fragment
         else{
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
             this.googleMap.getUiSettings().setCompassEnabled(true);
-            this.googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+            this.googleMap.animateCamera(CameraUpdateFactory.zoomTo(17));
         }
     }
 

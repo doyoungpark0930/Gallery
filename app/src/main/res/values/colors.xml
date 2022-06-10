@@ -10,4 +10,7 @@
     <color name="basic">#D6D5F4</color>
     <color name="strong">#6200EE</color>
     <color name="dark">#806796</color>
+    <color name="star">#FFD72C</color>
+    <color name="gray">#F5F5F5</color>
+    <color name="strong_gray">#797979</color>
 </resources>
