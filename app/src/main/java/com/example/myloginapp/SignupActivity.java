@@ -14,7 +14,8 @@ import com.google.android.material.button.MaterialButton;
 public class SignupActivity extends AppCompatActivity {
 
     private static final String TAG = "SignupActivity"; //로그 찍기위한 TAG변수. 로그 안 찍어볼거면 무시해도
-    private static final String IP_ADDRESS = "10.0.2.2"; //현재 나의 ip번호 -> 서버로 변경할 예정임.
+
+    private static final String IP_ADDRESS = "3.95.135.160"; //현재 나의 ip번호 -> 서버로 변경할 예정임.
 
     private String id;
     private String passwd;

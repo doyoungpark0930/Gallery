@@ -1,6 +1,7 @@
 package com.example.myloginapp;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,8 +22,22 @@ public class GalleryInfo implements Serializable{
     //dscReviewInfo객체형성, 해당 작품에서의 리뷰가 여러개 있기때문.
     private ArrayList<DesReviewInfo> desReviewInfo = new ArrayList<>();
 
+    public GalleryInfo(int i){
+        Log.v("tag","출력 출력할거애용");
+
+    }
+    public GalleryInfo(String ArtName,String StartPeriod,String EndPeriod,String Price,String image,String explanation){
+        this.name=ArtName;
+        this.StartPeriod=StartPeriod.replace(".","-");
+        this.EndPeriod=EndPeriod.replace(".","-");
+        this.Price=Price;
+        image=image.replace("\\","");
+        this.url=image;
+        this.desc=explanation;
+    }
     //img src를 int로 임시변경 -> url로 바꿀예정
-    public GalleryInfo(int ArtNum,String ArtName,String StartPeriod,String EndPeriod,String Price,String image,String explanation,String ExhibitionName,ArrayList<DesReviewInfo> desReviewInfo){
+    public GalleryInfo(int ArtNum,String ArtName,String StartPeriod,String EndPeriod,String Price,String image,String explanation,int ExhibitionNum,ArrayList<DesReviewInfo> desReviewInfo){
+        Log.v("tag","1");
         this.ArtNum=ArtNum;
         this.name=ArtName;
         this.StartPeriod=StartPeriod.replace(".","-");
@@ -30,7 +45,7 @@ public class GalleryInfo implements Serializable{
         this.Price=Price;
         image=image.replace("\\","");
         this.url=image;
-        //this.ExhibitionNum=exhibitionNum; 전시회 번호는 나중에 추가
+        this.ExhibitionNum=ExhibitionNum; //전시회 번호는 나중에 추가
         this.desc=explanation;
         this.desReviewInfo=desReviewInfo;
         this.ExhibitionName=ExhibitionName;

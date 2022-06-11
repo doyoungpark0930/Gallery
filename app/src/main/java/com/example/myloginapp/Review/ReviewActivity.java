@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myloginapp.DesReviewInfo;
 import com.example.myloginapp.GalleryLoader;
 import com.example.myloginapp.Home.HomeActivity;
 import com.example.myloginapp.LoginActivity;
@@ -113,7 +114,9 @@ public class ReviewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) { //rating bar의 숫자로 추가예정...
                 ReviewInsertLoader Loader= new ReviewInsertLoader();
-                Loader.execute("http://113.198.138.221/review.php", Integer.toString(Object.user.getNum()),Integer.toString(Object.art.get(position).getNum()), review.getText().toString(),Integer.toString(0));
+                Object.review.add(new DesReviewInfo(Object.user.getNum(),Object.art.get(position).getNum(), review.getText().toString(),0));
+                Loader.execute("http://3.95.135.160/review.php", Integer.toString(Object.user.getNum()),Integer.toString(Object.art.get(position).getNum()), review.getText().toString(),Integer.toString(0));
+
             }
         });
     }

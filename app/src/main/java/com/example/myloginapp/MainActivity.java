@@ -1,9 +1,6 @@
 package com.example.myloginapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-
-import android.app.NotificationManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,8 +28,10 @@ public class MainActivity extends AppCompatActivity {
         LoginLoader LoginLoader = new LoginLoader();
         LoginLoader.execute("http://" +IP_ADDRESS + "/select.php", "");
 
-        //GalleryLoader Loader = new GalleryLoader();
-        //Loader.execute("http://" + IP_ADDRESS + "/ArtSelect.php", "");
+        GalleryLoader Loader = new GalleryLoader();
+        Loader.execute("http://"+IP_ADDRESS +"/ArtSelect.php", "");
+
+
 
         getStarted.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     void navigateToLoginActivity(){ //LoginActivity로 가는 함수
         finish();
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
         startActivity(intent);
     }
 

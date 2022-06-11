@@ -1,12 +1,11 @@
 package com.example.myloginapp.Description;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,15 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myloginapp.DesReviewInfo;
 import com.example.myloginapp.GalleryInfo;
 import com.example.myloginapp.Home.HomeActivity;
 import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
 import com.example.myloginapp.Review.ReviewActivity;
-import com.example.myloginapp.DesReviewInfo;
-import com.example.myloginapp.UserInfo;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Description extends AppCompatActivity {
@@ -42,6 +39,7 @@ public class Description extends AppCompatActivity {
     TextView TimeText;
     TextView InfoText;
     Button button;
+    ImageButton subscribeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +50,8 @@ public class Description extends AppCompatActivity {
         NameText=findViewById(R.id.artTitle);
         TimeText =findViewById(R.id.artTime);
         InfoText=findViewById(R.id.artInfo);
+
+        subscribeButton=(ImageButton) findViewById(R.id.subscribeButton);
 
 
         Intent intent = getIntent(); //액티비티전환해서 넘어올때 해당 intent를 받는다.
@@ -65,6 +65,13 @@ public class Description extends AppCompatActivity {
             TimeText.setText(Object.art.get(position).PrintArt());
             InfoText.setText(Object.art.get(position).getDesc());
         }
+
+        subscribeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("hello","구독버튼클릭함.");
+            }
+        });
 
         //밑에는 리사이클러뷰 관련
         recyclerView=(RecyclerView) findViewById(R.id.dec_review); //description.xml에서따옴

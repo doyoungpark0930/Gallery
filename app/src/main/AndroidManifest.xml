@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.myloginapp">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <supports-screens android:largeScreens="true" android:anyDensity="true"></supports-screens>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <application
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_main"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.MyLoginApp">
+        android:theme="@style/Theme.MyLoginApp"
+        android:usesCleartextTraffic="true">
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDRqKODwGOVp4A8SpiVBomzL91QTc7t0Ns" />
+
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".SignupActivity"></activity>
         <activity android:name=".SearchingGallery"></activity>
@@ -39,7 +45,22 @@
 
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="false"/>
+            android:required="false" />
+
+        <service
+            android:name=".notice.FirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".notice.FirebaseInstanceIDService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

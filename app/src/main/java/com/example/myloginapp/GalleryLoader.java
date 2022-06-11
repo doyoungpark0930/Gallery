@@ -123,10 +123,8 @@ public class GalleryLoader extends AsyncTask<String, Long, String> {
                     sb.append(line);
                 }
                 jsonObject = new JSONObject(sb.toString());
-                jsonArray = jsonObject.getJSONArray("ArtTable");
 
                 if (jsonObject.length() != Initcnt) {
-                    Log.v("art", Integer.toString(Initcnt) + DBcnt);
                     Initcnt++;
                     showResult(sb.toString());
                     image = new ImageLoader();
@@ -141,38 +139,45 @@ public class GalleryLoader extends AsyncTask<String, Long, String> {
         }
     }
     private int showResult(String mJsonString) {
+
         try {
             Object.art.clear();
-            jsonObject = new JSONObject(mJsonString);
-            jsonArray = jsonObject.getJSONArray("ArtTable");
+            JSONObject jsonObject = new JSONObject(mJsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray("ArtTable");
 
             for (int i = 0; i < jsonArray.length(); i++) {
-
                 JSONObject item = jsonArray.getJSONObject(i);
 
-                String no = item.getString("no");
-                String name = item.getString("name");
+                String no = item.getString("artnum");
+                String name = item.getString("artname");
+                Log.v("art",item.getString("artname"));
                 String urlStr = item.getString("url");
                 String StartPeriod = item.getString("StartPeriod").replace(" ", "");
-                String EndPeriod = item.getString("EndPeriod");
+                String EndPeriod = item.getString("EndPeriod").replace(" ", "");
+
                 String Price = item.getString("Price");
                 String Explanation = item.getString("Explanation");
-                String ExhibitionName = item.getString("location");
+                String ExhibitionNum = item.getString("exhibitionnum");
+
+                Log.v("art", no+ExhibitionNum);
+
                 ArrayList<DesReviewInfo> desReviewInfo = new ArrayList<>();  //제가 추가한 것
                 //바로 밑에 주석부분 반복문돌려서 리뷰 값 넣어주세요.
                 //desReviewInfo.add(new DesReviewInfo(item.getInt("star"),item.getString("reviewTitle"),item.getString("reviewEvaluation")));
                 desReviewInfo.add(new DesReviewInfo(1, "abc", "def")); //임의로 넣어본 것. 나중에 지워주셈
                 desReviewInfo.add(new DesReviewInfo(5, "ㄹㄹ", "ㄴㅇㄹ")); //임의로 넣어본 것
+
                 EndPeriod = EndPeriod.replace(".", "-");
 
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 Date currentTime = new Date();
                 try {
                     Date date = format.parse(EndPeriod);
-                    Log.v("tag", String.valueOf(date));
+                    //Log.v("tag", String.valueOf(date));
                     if (currentTime.before(date)) {
-                        Log.v("tag", name);
-                        Object.art.add(new GalleryInfo(Integer.parseInt(no), name, StartPeriod, EndPeriod, Price, urlStr, Explanation, ExhibitionName, desReviewInfo));
+                       // Log.v("tag", name);
+                        // StartPeriod,String EndPeriod,String Price,String image,String explanation,int ExhibitionNum,ArrayList<DesReviewInfo> desReviewInfo
+                        Object.art.add(new GalleryInfo(Integer.parseInt(no),name,StartPeriod,EndPeriod,Price,urlStr,Explanation,0,desReviewInfo));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -213,7 +218,7 @@ public class GalleryLoader extends AsyncTask<String, Long, String> {
 
     }
     //정렬기능을 수행하기 위한 클래스로, 임시로 이곳에 배치
-//도영님이 정렬 페이지를 만들어 올리는 즉시 그쪽으로 이동예정.
+    //도영님이 정렬 페이지를 만들어 올리는 즉시 그쪽으로 이동예정.
     class ArtComparator implements Comparator<GalleryInfo> {
         @Override
         public int compare(GalleryInfo o1, GalleryInfo o2) {
@@ -250,21 +255,3 @@ public class GalleryLoader extends AsyncTask<String, Long, String> {
         }
     }
 }
-/*
-    public static class com.example.myloginapp.SignupLoader.DBLoader extends Thread{
-        public String mJsonString;
-        JSONArray jsonArray;
-        public com.example.myloginapp.SignupLoader.DBLoader(String jsonString){
-            mJsonString=jsonString;
-        }
-        public void run(){
-            Initcnt=showResult();
-            Log.v("art",Integer.toString(Initcnt)+" "+Integer.toString(DBcnt));
-            while(true) {
-                ;
-            }
-        }
-Intent intent = new Intent(Description.this, ReviewActivity.class);
-                intent.putExtra("ObjectPosition", position);
-                startActivity(intent);
-    }*/

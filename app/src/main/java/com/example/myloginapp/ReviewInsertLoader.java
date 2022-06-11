@@ -29,7 +29,7 @@ public class ReviewInsertLoader extends AsyncTask<String, Void, String> {
         String text = (String) params[3];
         String rating =(String) params[4];
         String serverURL = (String) params[0];
-        String postParameters = "usernum=" + usernum + "&artnum=" + artnum +"&text"+text+"&rating=" + rating;
+        String postParameters = "usernum=" + usernum + "&artnum=" + artnum +"&mention"+text+"&star=" + rating;
 
         try {
 
