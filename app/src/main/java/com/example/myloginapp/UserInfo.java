@@ -1,5 +1,10 @@
 package com.example.myloginapp;
+import com.google.firebase.database.Exclude;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class UserInfo {
 
     private int userNum;
@@ -23,5 +28,15 @@ public class UserInfo {
     }
     public String getEmail(){
         return email;
+    }
+    @Exclude
+    public Map<String, java.lang.Object> toMap() {
+        HashMap<String, java.lang.Object> result = new HashMap<>();
+
+        result.put("usernum", userNum);
+        result.put("id", id);
+        result.put("email", email);
+        result.put("passwd", passwd);
+        return result;
     }
 }

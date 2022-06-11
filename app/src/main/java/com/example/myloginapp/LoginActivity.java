@@ -58,36 +58,36 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    id = username.getText().toString();
-                    passwd = password.getText().toString();
-                    Log.v("art",Integer.toString(Object.userlist.size()));
-                    boolean is_checking = false;
-                    boolean is_valid = false;
-                    for (UserInfo user : Object.userlist) {
-                        if (user.getId().equals(id))
-                            if (user.getPasswd().equals(passwd)) {
-                                Object.user = user;
-                                is_checking = true;
-                                is_valid = true;
-                                autoLoginEdit.putString("userId", id);
-                                autoLoginEdit.putString("userPassword", passwd);
-                                autoLoginEdit.commit();
-                            } else
-                                is_valid = false;
-                    }
-
-                    if (is_checking && is_valid) { //로그인이 된다면 실행됨
-                        forgat.setText("환영합니다 " + Object.user.getId() + "고객님!");
-                        navigateToSearchingGallery();
-                    } else if (!is_checking) {  //로그인이 실패됐다면
-                        Toast.makeText(getApplicationContext(), "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show(); //로그인화면으로 왔을시 거기서 ID생성 토스트메시지 띄워줌
-                    } else if (!is_valid) {
-                        Toast.makeText(getApplicationContext(), "없는 ID 입니다.", Toast.LENGTH_SHORT).show(); //로그인화면으로 왔을시 거기서 ID생성 토스트메시지 띄워줌
-                    }
+            @Override
+            public void onClick(View v) {
+                id = username.getText().toString();
+                passwd = password.getText().toString();
+                Log.v("art",Integer.toString(Object.userlist.size()));
+                boolean is_checking = false;
+                boolean is_valid = false;
+                for (UserInfo user : Object.userlist) {
+                    if (user.getId().equals(id))
+                        if (user.getPasswd().equals(passwd)) {
+                            Object.user = user;
+                            is_checking = true;
+                            is_valid = true;
+                            autoLoginEdit.putString("userId", id);
+                            autoLoginEdit.putString("userPassword", passwd);
+                            autoLoginEdit.commit();
+                        } else
+                            is_valid = false;
                 }
-            });
+
+                if (is_checking && is_valid) { //로그인이 된다면 실행됨
+                    forgat.setText("환영합니다 " + Object.user.getId() + "고객님!");
+                    navigateToSearchingGallery();
+                } else if (!is_checking) {  //로그인이 실패됐다면
+                    Toast.makeText(getApplicationContext(), "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show(); //로그인화면으로 왔을시 거기서 ID생성 토스트메시지 띄워줌
+                } else if (!is_valid) {
+                    Toast.makeText(getApplicationContext(), "없는 ID 입니다.", Toast.LENGTH_SHORT).show(); //로그인화면으로 왔을시 거기서 ID생성 토스트메시지 띄워줌
+                }
+            }
+        });
         signupbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

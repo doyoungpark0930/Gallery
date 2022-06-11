@@ -184,11 +184,13 @@ public class GalleryLoader extends AsyncTask<String, Long, String> {
 
         return DBcnt;
     }
+
     @Override
     protected void onProgressUpdate(Long... values) {
         desReviewAdapter=new DesReviewAdapter(Object.review);
         recyclerView.setAdapter(desReviewAdapter);
     }
+
     private void showReview(String mJsonString) {
 
         try {
@@ -249,10 +251,10 @@ public class GalleryLoader extends AsyncTask<String, Long, String> {
     }
 }
 /*
-    public static class DBLoader extends Thread{
+    public static class com.example.myloginapp.SignupLoader.DBLoader extends Thread{
         public String mJsonString;
         JSONArray jsonArray;
-        public DBLoader(String jsonString){
+        public com.example.myloginapp.SignupLoader.DBLoader(String jsonString){
             mJsonString=jsonString;
         }
         public void run(){

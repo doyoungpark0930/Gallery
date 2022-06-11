@@ -1,6 +1,7 @@
 package com.example.myloginapp;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,11 +71,11 @@ public class LoginLoader extends AsyncTask<String, Void, String> {
 
                 JSONObject item = jsonArray.getJSONObject(i);
 
-                String no = item.getString("no");
+                String no = item.getString("num");
                 String id = item.getString("id");
                 String passwd = item.getString("passwd");
                 String email = item.getString("email");
-
+                Log.v("ttt",Integer.toString(Object.userlist.size()));
                 Object.userlist.add(new UserInfo(Integer.parseInt(no), id, passwd, email));
             }
 
