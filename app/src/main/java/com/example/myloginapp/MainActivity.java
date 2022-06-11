@@ -1,9 +1,6 @@
 package com.example.myloginapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-
-import android.app.NotificationManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private static String CHANNEL_NAME = "Channel1";
 
     public static String IP_ADDRESS = "35.174.139.168";
+
     static boolean isUpdate=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
