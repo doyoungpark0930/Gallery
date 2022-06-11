@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import com.example.myloginapp.DesReviewInfo;
 import com.example.myloginapp.GalleryLoader;
 import com.example.myloginapp.Home.HomeActivity;
 import com.example.myloginapp.LoginActivity;
+import com.example.myloginapp.MainActivity;
 import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
 import com.example.myloginapp.ReviewInsertLoader;
@@ -106,7 +108,7 @@ public class ReviewActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                ; //이거 추가좀...
+                //cancel시..
             }
         });
 
@@ -116,7 +118,8 @@ public class ReviewActivity extends AppCompatActivity {
                 ReviewInsertLoader Loader= new ReviewInsertLoader();
                 Object.review.add(new DesReviewInfo(Object.user.getNum(),Object.art.get(position).getNum(), review.getText().toString(),0));
                 Loader.execute("http://3.95.135.160/review.php", Integer.toString(Object.user.getNum()),Integer.toString(Object.art.get(position).getNum()), review.getText().toString(),Integer.toString(0));
-
+                Intent intent = new Intent(ReviewActivity.this, HomeActivity.class);
+                startActivity(intent);
             }
         });
     }
