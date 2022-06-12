@@ -1,6 +1,8 @@
 package com.example.myloginapp.Description;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -16,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myloginapp.DesReviewInfo;
-import com.example.myloginapp.GalleryInfo;
 import com.example.myloginapp.Home.HomeActivity;
 import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
@@ -35,6 +36,12 @@ public class Description extends AppCompatActivity {
 
 
     int position;
+
+    Bitmap ArtImage; //이미지
+    String ArtName; //이름
+    String ArtTime; //시작날짜 ,종료날짜,가격 정보
+    String ArtInfo; //전시정보
+    ArrayList<DesReviewInfo> ReviewList;
 
     ImageView back2main;
     ImageView imageView;
@@ -61,12 +68,31 @@ public class Description extends AppCompatActivity {
 
         if(intent.getExtras()!=null){ //Description.java로 액티비티전환시 넘길때 액티비티의 값을 받음
 
+           /*
             position=(int)intent.getSerializableExtra("ObjectPosition"); // position값받음
 
             imageView.setImageBitmap(Object.art.get(position).getImage());
             NameText.setText(Object.art.get(position).getName());
             TimeText.setText(Object.art.get(position).PrintArt());
             InfoText.setText(Object.art.get(position).getDesc());
+
+            */
+
+
+
+
+
+            ArtImage=byte2Bitmap(intent.getByteArrayExtra("Image"));
+            ArtName=(String)intent.getSerializableExtra("Name");
+            ArtTime=(String) intent.getSerializableExtra("ArtTime");
+            ArtInfo=(String) intent.getSerializableExtra("ArtInfo");
+
+            imageView.setImageBitmap(ArtImage);
+            NameText.setText(ArtName);
+            TimeText.setText(ArtTime);
+            InfoText.setText(ArtInfo);
+
+
         }
 
         subscribeButton.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +153,9 @@ public class Description extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    private Bitmap byte2Bitmap(byte[] data) { //byte값을 Bitmap으로 변환해주는 메소드
+        return BitmapFactory.decodeByteArray(data, 0, data.length);
     }
 
 

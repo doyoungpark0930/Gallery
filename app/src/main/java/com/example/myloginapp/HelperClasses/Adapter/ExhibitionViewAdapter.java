@@ -1,6 +1,7 @@
 package com.example.myloginapp.HelperClasses.Adapter;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myloginapp.Description.Description;
 import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
+
+import java.io.ByteArrayOutputStream;
 
 public class ExhibitionViewAdapter extends RecyclerView.Adapter<ExhibitionViewAdapter.Holder>{
 
@@ -44,6 +47,12 @@ public class ExhibitionViewAdapter extends RecyclerView.Adapter<ExhibitionViewAd
         public TextView title, desc;
         public ImageView image;
 
+        StringBuilder ArtTime;
+        String getArtTime;
+        byte[] ImageBt;
+        String ArtName;
+        String ArtDsc;
+        //ArrayList<DesReviewInfo> ReviewList; //해당 뷰 객체의 리뷰리스트
 
 
         public Holder(@NonNull View view){
@@ -51,17 +60,29 @@ public class ExhibitionViewAdapter extends RecyclerView.Adapter<ExhibitionViewAd
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=null;
-                    if(isObject){ //오브젝트 넘기는 용을 구현해주세요
-                        //도영님
-                        isObject=false;
-                    }else {
-                        int position = getAdapterPosition(); //클릭된 현재 뷰의 position
-                        intent = new Intent(v.getContext(), Description.class); //프래그먼트에서 액티비티로 화면전환할때는 HomeFragment가아닌 context로 받아야한다.
-                        //밑에와 같이 putExtra로 값을 전달하고 Description.java에서 getExtra로 값을 받는다
-                        intent.putExtra("ObjectPosition", position);
-                    }
+
+
+
+                    int position=getAdapterPosition(); //클릭된 현재 뷰의 position
+                    ArtTime=(StringBuilder)  Object.art.get(position).PrintArt();
+                    getArtTime=ArtTime.toString(); //StringBuilder인 ArtTime을 String형으로 변경
+                    ImageBt=bitmap2Bytes(Object.art.get(position).getImage()); //bitmap인 이미지를 byte값으로 변환
+                    ArtName=(String)Object.art.get(position).getName();
+                    ArtDsc=(String)Object.art.get(position).getDesc();
+
+                    Intent intent=new Intent(v.getContext(),Description.class); //intent를 이용해 Activity전환
+                    //이렇게 putExtra로 값을 전달하고 Description.java에서 GetExtra로 값을 받는다
+                    intent.putExtra("ArtTime",getArtTime);
+                    intent.putExtra("Image",ImageBt); //일단 byte값을 넘기고 getExtra에서 byte를 bitmap으로 다시 변환
+                    intent.putExtra("Name",ArtName);
+                    intent.putExtra("ArtInfo",ArtDsc);
+
                     v.getContext().startActivity(intent);
+                }
+                private byte[] bitmap2Bytes(Bitmap bitmap) { //Bitmap을 byte형식으로 바꿔주는 메소드
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    return baos.toByteArray();
                 }
 
             });

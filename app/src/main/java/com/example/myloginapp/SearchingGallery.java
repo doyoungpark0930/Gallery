@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -17,14 +16,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
-import com.example.myloginapp.Description.DesReviewAdapter;
 import com.example.myloginapp.Description.Description;
-import com.example.myloginapp.HelperClasses.Adapter.ExhibitionViewAdapter;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FilterReader;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,11 +111,22 @@ public class SearchingGallery extends AppCompatActivity {
                 @Override
                 public void onClick(View v) { //해당 뷰 객체의 이미지,설명 이런 것들을 intent를 이용해 넘겨줌
 
-                    ExhibitionViewAdapter.isObject=true;
+
+                    ArtTime=(StringBuilder)  itemsModelListFiltered.get(position).PrintArt();
+                    getArtTime=ArtTime.toString(); //StringBuilder인 ArtTime을 String형으로 변경
+                    ImageBt=bitmap2Bytes(itemsModelListFiltered.get(position).getImage()); //bitmap인 이미지를 byte값으로 변환
+                    ArtName=(String)itemsModelListFiltered.get(position).getName();
+                    ArtDsc=(String)itemsModelListFiltered.get(position).getDesc();
+
                     Intent intent=new Intent(SearchingGallery.this, Description.class); //intent를 이용해 Activity전환
-                    //이렇게 putExtra로 값을 전달하고 Description.java에서 getExtra로 값을 받는다
-                    intent.putExtra("ObjectPosition",itemsModelListFiltered.get(position));
+                    //이렇게 putExtra로 값을 전달하고 Description.java에서 GetExtra로 값을 받는다
+                    intent.putExtra("ArtTime",getArtTime);
+                    intent.putExtra("Image",ImageBt); //일단 byte값을 넘기고 getExtra에서 byte를 bitmap으로 다시 변환
+                    intent.putExtra("Name",ArtName);
+                    intent.putExtra("ArtInfo",ArtDsc);
+
                     startActivity(intent);
+
 
                 }
             });
@@ -171,6 +176,12 @@ public class SearchingGallery extends AppCompatActivity {
             };
             return filter;
         }
+    }
+
+    private byte[] bitmap2Bytes(Bitmap bitmap) { //Bitmap을 byte형식으로 바꿔주는 메소드
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        return baos.toByteArray();
     }
 
 }

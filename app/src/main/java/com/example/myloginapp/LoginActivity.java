@@ -1,34 +1,21 @@
 package com.example.myloginapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import androidx.appcompat.app.AppCompatActivity;
+
+
 import com.example.myloginapp.Home.HomeActivity;
 import com.example.myloginapp.Mypage.UserFragment;
 import com.google.android.material.button.MaterialButton;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -39,7 +26,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView forgat;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -58,9 +46,12 @@ public class LoginActivity extends AppCompatActivity {
             password.setText(auto.getString("userPassword", null));
         }
 
-        loginbtn.setOnClickListener(new View.OnClickListener() {
+        loginbtn.setOnClickListener(new View.OnClickListener()
+        {
+
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 id = username.getText().toString();
                 passwd = password.getText().toString();
                 Log.v("art",Integer.toString(Object.userlist.size()));
@@ -87,8 +78,10 @@ public class LoginActivity extends AppCompatActivity {
                 } else if (!is_valid) {
                     Toast.makeText(getApplicationContext(), "없는 ID 입니다.", Toast.LENGTH_SHORT).show(); //로그인화면으로 왔을시 거기서 ID생성 토스트메시지 띄워줌
                 }
+
             }
         });
+
         signupbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
 
     void navigateToSearchingGallery()
     {
