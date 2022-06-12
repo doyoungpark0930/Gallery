@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myloginapp.Home.HomeActivity;
 import com.example.myloginapp.Mypage.UserFragment;
 import com.google.android.material.button.MaterialButton;
 
@@ -100,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
     void navigateToSearchingGallery()
     {
         finish();
-        Intent intent = new Intent(LoginActivity.this, UserFragment.class);
+        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);
     }
     void navigateToSignUpActivity(){

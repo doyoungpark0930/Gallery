@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myloginapp.DesReviewInfo;
 import com.example.myloginapp.R;
-
+import com.example.myloginapp.UserInfo;
+import com.example.myloginapp.Object;
 import java.util.ArrayList;
 
 public class DesReviewAdapter extends RecyclerView.Adapter<DesReviewAdapter.CustomViewHolder> {
@@ -35,11 +36,12 @@ public class DesReviewAdapter extends RecyclerView.Adapter<DesReviewAdapter.Cust
     @Override
     public void onBindViewHolder(@NonNull DesReviewAdapter.CustomViewHolder holder, int position) {
         holder.ratingBar.setRating(arrayList.get(position).getStar());
-        holder.ReviewTitle.setText(arrayList.get(position).getTitle());
+        for(UserInfo user:Object.userlist){
+            for(int i=0; i<arrayList.size();i++)
+                if(arrayList.get(i).getUsernum()==user.getNum())
+                    holder.ReviewTitle.setText(user.getId());
+        }
         holder.ReviewEvaluation.setText(arrayList.get(position).getEvaluation());
-        holder.ratingBar.setRating(arrayList.get(position).getStar());
-
-
     }
     @Override
     public int getItemCount() {

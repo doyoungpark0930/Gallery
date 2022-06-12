@@ -18,7 +18,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.example.myloginapp.Description.DesReviewAdapter;
 import com.example.myloginapp.Description.Description;
+import com.example.myloginapp.HelperClasses.Adapter.ExhibitionViewAdapter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FilterReader;
@@ -115,10 +117,10 @@ public class SearchingGallery extends AppCompatActivity {
                 @Override
                 public void onClick(View v) { //해당 뷰 객체의 이미지,설명 이런 것들을 intent를 이용해 넘겨줌
 
-
+                    ExhibitionViewAdapter.isObject=true;
                     Intent intent=new Intent(SearchingGallery.this, Description.class); //intent를 이용해 Activity전환
                     //이렇게 putExtra로 값을 전달하고 Description.java에서 getExtra로 값을 받는다
-                    intent.putExtra("ObjectPosition",position);
+                    intent.putExtra("ObjectPosition",itemsModelListFiltered.get(position));
                     startActivity(intent);
 
                 }

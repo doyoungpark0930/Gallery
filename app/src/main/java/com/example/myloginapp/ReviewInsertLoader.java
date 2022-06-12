@@ -1,6 +1,8 @@
 package com.example.myloginapp;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -9,8 +11,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-//Review작성
 public class ReviewInsertLoader extends AsyncTask<String, Void, String> {
+
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -26,11 +29,12 @@ public class ReviewInsertLoader extends AsyncTask<String, Void, String> {
 
         String usernum = (String) params[1];
         String artnum = (String) params[2];
-        String text = (String) params[3];
-        String rating =(String) params[4];
+        String mention = (String) params[3];
+        String rating= (String) params[4];
         String serverURL = (String) params[0];
-        String postParameters = "usernum=" + usernum + "&artnum=" + artnum +"&mention"+text+"&star=" + rating;
+        String postParameters = "usernum=" + usernum + "&artnum=" + artnum + "&mention=" + mention+"&star="+rating+"\n";
 
+        Log.e("tag",postParameters);
         try {
 
             URL url = new URL(serverURL);
@@ -81,4 +85,7 @@ public class ReviewInsertLoader extends AsyncTask<String, Void, String> {
             return new String("Error: " + e.getMessage());
         }
     }
+
+
+
 }

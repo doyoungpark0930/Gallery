@@ -16,7 +16,7 @@ import com.example.myloginapp.R;
 
 public class ExhibitionViewAdapter extends RecyclerView.Adapter<ExhibitionViewAdapter.Holder>{
 
-
+    public static boolean isObject=false;
 
     @NonNull
     @Override
@@ -51,10 +51,16 @@ public class ExhibitionViewAdapter extends RecyclerView.Adapter<ExhibitionViewAd
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position=getAdapterPosition(); //클릭된 현재 뷰의 position
-                    Intent intent=new Intent(v.getContext(),Description.class); //프래그먼트에서 액티비티로 화면전환할때는 HomeFragment가아닌 context로 받아야한다.
-                    //밑에와 같이 putExtra로 값을 전달하고 Description.java에서 getExtra로 값을 받는다
-                    intent.putExtra("ObjectPosition",position);
+                    Intent intent=null;
+                    if(isObject){ //오브젝트 넘기는 용을 구현해주세요
+                        //도영님
+                        isObject=false;
+                    }else {
+                        int position = getAdapterPosition(); //클릭된 현재 뷰의 position
+                        intent = new Intent(v.getContext(), Description.class); //프래그먼트에서 액티비티로 화면전환할때는 HomeFragment가아닌 context로 받아야한다.
+                        //밑에와 같이 putExtra로 값을 전달하고 Description.java에서 getExtra로 값을 받는다
+                        intent.putExtra("ObjectPosition", position);
+                    }
                     v.getContext().startActivity(intent);
                 }
 

@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myloginapp.DesReviewInfo;
+import com.example.myloginapp.Description.Description;
 import com.example.myloginapp.GalleryLoader;
 import com.example.myloginapp.Home.HomeActivity;
 import com.example.myloginapp.LoginActivity;
@@ -24,6 +25,7 @@ import com.example.myloginapp.MainActivity;
 import com.example.myloginapp.Object;
 import com.example.myloginapp.R;
 import com.example.myloginapp.ReviewInsertLoader;
+import com.example.myloginapp.ReviewLoader;
 import com.example.myloginapp.SearchingGallery;
 import com.example.myloginapp.SignupActivity;
 import com.google.android.material.textfield.TextInputEditText;
@@ -32,6 +34,7 @@ import com.google.android.material.textfield.TextInputEditText;
 public class ReviewActivity extends AppCompatActivity {
     SearchView searchView;
     ListView listView;
+    private static final String IP_ADDRESS = "3.95.135.160"; //현재 나의 ip번호 -> 서버로 변경할 예정임.
 
     ImageView imageView;
 
@@ -48,7 +51,15 @@ public class ReviewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activtiy_review);
-
+        /*
+        if(Object.user==null){
+            showDialog();
+            Intent intent=new Intent(ReviewActivity.this, Description.class); //intent를 이용해 Activity전환
+                //이렇게 putExtra로 값을 전달하고 Description.java에서 getExtra로 값을 받는다
+                intent.putExtra("ObjectPosition",position);
+                startActivity(intent);
+            현재 로그인 부분 오류 고치면 이부분 주석 처리 빼고 사용.
+        }*/
         imageView= (ImageView) findViewById(R.id.gallery_image);
         NameText= (TextView) findViewById(R.id.gallery_name);
         ratingBar = (RatingBar) findViewById(R.id.ratingbar) ;
@@ -108,7 +119,10 @@ public class ReviewActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                //cancel시..
+                Intent intent=new Intent(ReviewActivity.this, Description.class); //intent를 이용해 Activity전환
+                //이렇게 putExtra로 값을 전달하고 Description.java에서 getExtra로 값을 받는다
+                intent.putExtra("ObjectPosition",position);
+                startActivity(intent);
             }
         });
 
@@ -116,10 +130,20 @@ public class ReviewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) { //rating bar의 숫자로 추가예정...
                 ReviewInsertLoader Loader= new ReviewInsertLoader();
-                Object.review.add(new DesReviewInfo(Object.user.getNum(),Object.art.get(position).getNum(), review.getText().toString(),0));
-                Loader.execute("http://3.95.135.160/review.php", Integer.toString(Object.user.getNum()),Integer.toString(Object.art.get(position).getNum()), review.getText().toString(),Integer.toString(0));
-                Intent intent = new Intent(ReviewActivity.this, HomeActivity.class);
-                startActivity(intent);
+                //로그인을 해야지만 할수 있도록 해야하는데..왜 안되는거지?
+                // 변경해야할 사항
+                //Loader.execute("http://"+IP_ADDRESS+"/review.php", Integer.toString(Object.user.getNum()),Integer.toString(Object.art.get(position).getNum()), review.getText().toString(),Integer.toString(rating));
+                //
+                Log.e("tag",review.getText().toString());
+                Loader.execute("http://"+IP_ADDRESS+"/IReview.php", Integer.toString(1),Integer.toString(Object.art.get(position).getNum()), review.getText().toString(),Integer.toString(0));
+
+                ReviewLoader RLoader= new ReviewLoader();
+                RLoader.execute("http://"+IP_ADDRESS+"/review.php");
+
+                //Description.desReviewAdapter.notifyItemInserted(Object.review.size());
+                Log.e("tag",Integer.toString(Object.review.size()));
+
+                finish();
             }
         });
     }
@@ -134,5 +158,9 @@ public class ReviewActivity extends AppCompatActivity {
 
         myAlertBuilder.create();
         myAlertBuilder.show();
+    }
+    @Override
+    public void onBackPressed(){
+
     }
 }

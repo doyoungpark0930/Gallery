@@ -10,7 +10,7 @@ public class Object {
 	static public ArrayList<GalleryInfo> art=new ArrayList<GalleryInfo>();
     static ArrayList<ExhibitionInfo> exhibition=new ArrayList<ExhibitionInfo>();
 	static public ArrayList<DesReviewInfo> review=new ArrayList<DesReviewInfo>();
-	static ArrayList<UserInfo> userlist=new ArrayList<UserInfo>();
+	static public ArrayList<UserInfo> userlist=new ArrayList<UserInfo>();
 	static public UserInfo user; //로그인한 사용자 정보를 담을 객체
 
 }

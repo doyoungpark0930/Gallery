@@ -2,12 +2,14 @@ package com.example.myloginapp.Description;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,7 +28,8 @@ public class Description extends AppCompatActivity {
 
 
     ArrayList<DesReviewInfo> arrayList;
-    DesReviewAdapter desReviewAdapter;
+    public static DesReviewAdapter desReviewAdapter;
+    public static ArrayList<DesReviewInfo> tmp;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
 
@@ -69,7 +72,7 @@ public class Description extends AppCompatActivity {
         subscribeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v("hello","구독버튼클릭함.");
+                Toast.makeText(getApplicationContext(), "구독 하셨습니다.", Toast.LENGTH_SHORT).show(); //로그인화면으로 왔을시 거기서 ID생성 토스트메시지 띄워줌
             }
         });
 
@@ -79,15 +82,31 @@ public class Description extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         arrayList= Object.art.get(position).getDesReviewInfo();
 
-        ArrayList<DesReviewInfo> tmp=new ArrayList<DesReviewInfo>();
+        tmp=new ArrayList<DesReviewInfo>();
+        tmp.clear();
         for(DesReviewInfo i : Object.review){
-            for(GalleryInfo j: Object.art){
-                if(i.getArtnum()==j.getNum())
-                    tmp.add(i);
+            if(i.getArtnum()==Object.art.get(position).getNum()) {
+                tmp.add(i);
             }
         }
+        Log.e("art","tmp의 크기는?"+Integer.toString(tmp.size()));
         desReviewAdapter=new DesReviewAdapter(tmp);
         recyclerView.setAdapter(desReviewAdapter);
+        Handler mHandler = new Handler();
+        Thread t = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                // UI 작업 수행 X
+                mHandler.post(new Runnable(){
+                    @Override
+                    public void run() {
+
+                        desReviewAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
+        t.start();
 
         button = (Button) findViewById(R.id.review_button);
         back2main = (ImageView) findViewById(R.id.back2main);

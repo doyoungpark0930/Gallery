@@ -100,12 +100,12 @@ public class UserFragment extends Fragment {
         adapter = new SubscribeViewAdapter();
         ArrayList<DesReviewInfo> tmp=new ArrayList<DesReviewInfo>();
         for(DesReviewInfo i : Object.review){
-            for(GalleryInfo j: Object.art){
-                if(i.getArtnum()==j.getNum())
-                    tmp.add(i);
+            if(i.getArtnum()==Object.user.getNum()) {
+                tmp.add(i);
             }
         }
-        adapter2 = new ReviewAdapter(tmp);
+        if(tmp!=null)
+            adapter2 = new ReviewAdapter(tmp);
 
         featuredRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         featuredRecycler.setAdapter(adapter);

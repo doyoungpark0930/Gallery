@@ -88,60 +88,15 @@ public class GalleryLoader extends AsyncTask<String, Long, String> {
             Collections.sort(Object.art, new ArtComparator());
             bufferedReader.close();
 
-            while (true) {
-
-                httpURLConnection = (HttpURLConnection) url.openConnection();
-
-                httpURLConnection.setReadTimeout(5000);
-                httpURLConnection.setConnectTimeout(5000);
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.connect();
-
-
-                outputStream = httpURLConnection.getOutputStream();
-                outputStream.write(postParameters.getBytes("UTF-8"));
-                outputStream.flush();
-                outputStream.close();
-
-
-                responseStatusCode = httpURLConnection.getResponseCode();
-
-
-                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
-                    inputStream = httpURLConnection.getInputStream();
-                } else {
-                    inputStream = httpURLConnection.getErrorStream();
-                }
-
-
-                inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-                bufferedReader = new BufferedReader(inputStreamReader);
-                sb = new StringBuilder();
-                line = null;
-
-                while ((line = bufferedReader.readLine()) != null) {
-                    sb.append(line);
-                }
-                jsonObject = new JSONObject(sb.toString());
-
-                if (jsonObject.length() != Initcnt) {
-                    Initcnt++;
-                    showResult(sb.toString());
-                    image = new ImageLoader();
-                    image.execute();
-                    Collections.sort(Object.art, new ArtComparator());
-
-                }
-            }
         } catch (Exception e) {
-
             return new String("Error: " + e.getMessage());
         }
+        return null;
     }
+
     private int showResult(String mJsonString) {
 
         try {
-            Object.art.clear();
             JSONObject jsonObject = new JSONObject(mJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray("ArtTable");
 
@@ -190,33 +145,8 @@ public class GalleryLoader extends AsyncTask<String, Long, String> {
         return DBcnt;
     }
 
-    @Override
-    protected void onProgressUpdate(Long... values) {
-        desReviewAdapter=new DesReviewAdapter(Object.review);
-        recyclerView.setAdapter(desReviewAdapter);
-    }
 
-    private void showReview(String mJsonString) {
 
-        try {
-            Object.review.clear();
-            jsonObject = new JSONObject(mJsonString);
-            jsonArray = jsonObject.getJSONArray("ReviewTable");
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject item = jsonArray.getJSONObject(i);
-
-                String usernum = item.getString("usernum");
-                String artnum = item.getString("usernum");
-                String review = item.getString("review");
-                int star = item.getInt("star");
-                Object.review.add(new DesReviewInfo(Integer.parseInt(usernum), Integer.parseInt(artnum), review, star));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
     //정렬기능을 수행하기 위한 클래스로, 임시로 이곳에 배치
     //도영님이 정렬 페이지를 만들어 올리는 즉시 그쪽으로 이동예정.
     class ArtComparator implements Comparator<GalleryInfo> {

@@ -20,7 +20,7 @@ public class GalleryInfo implements Serializable{
     private String ExhibitionName; // 없앨 예정.
 
     //dscReviewInfo객체형성, 해당 작품에서의 리뷰가 여러개 있기때문.
-    private ArrayList<DesReviewInfo> desReviewInfo = new ArrayList<>();
+    public static ArrayList<DesReviewInfo> desReviewInfo = new ArrayList<>();
 
     public GalleryInfo(int i){
         Log.v("tag","출력 출력할거애용");

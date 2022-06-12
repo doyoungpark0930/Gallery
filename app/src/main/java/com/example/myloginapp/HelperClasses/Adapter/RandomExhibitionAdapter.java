@@ -67,7 +67,9 @@ public class RandomExhibitionAdapter extends RecyclerView.Adapter<RandomExhibiti
         Random r = new Random(seed);
         for(int i=0;i<10;i++)
         {
-            a[i] = r.nextInt(Object.art.size())+1;
+            if(Object.art.size() > 0) {
+                a[i] = r.nextInt(Object.art.size())+1;
+            }
             for(int j=0;j<i;j++)
             {
                 if(a[i]==a[j])
@@ -83,9 +85,9 @@ public class RandomExhibitionAdapter extends RecyclerView.Adapter<RandomExhibiti
 
         Collections.sort(list);
         isStop=true;
-        Log.v("ttt",list.toString());
         return list;
     }
+
     public static class Holder extends RecyclerView.ViewHolder {
         public TextView title, desc;
         public ImageView image;
@@ -126,22 +128,3 @@ public class RandomExhibitionAdapter extends RecyclerView.Adapter<RandomExhibiti
         }
     }
 }
-
-/*
-
-/*
-    // end randomize()
-    public List RandNum() {
-        Set<Integer> set = new HashSet<>();
-        while (set.size() < 10) {
-            Double d = Math.random() * Object.art.size() + 1;
-            Log.v("art", Integer.toString(d.intValue()));
-            set.add(d.intValue());
-        }
-
-        List<Integer> list = new ArrayList<>(set);
-        Collections.sort(list);
-        System.out.println(list);
-        return list;
-    }
-*/
